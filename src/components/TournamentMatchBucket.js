@@ -32,6 +32,7 @@ const MatchCard = ({ m, gameType }) => {
               <p>VS</p>
               <Team team={team2} side='right' />
             </StyledMatchInfo>
+            <div className='divider'></div>
             <VodList bestOf={m.matchData.bestOf} mapData={m.matchData.mapData} />
           </StyledMatchCard>
           : <StyledMatchCard>
@@ -50,6 +51,11 @@ export default TournamentMatchBucket
 
 const StyledTournamentMatchBucket = styled.div`
   padding: 1rem;
+  .divider {
+    height: 30px;
+    margin: 0 1rem;
+    border-left: 1px solid rgba(211, 211, 211, 0.2);
+  }
 `
 
 const StyledMatchInfo = styled.div`
@@ -66,4 +72,5 @@ const StyledMatchCard = styled.div`
   align-items: center;
   justify-content: space-around;
   padding: 1rem;
+  border-bottom: 1px solid rgba(211, 211, 211, 0.1);
 `

@@ -25,11 +25,11 @@ const StyledEventSideBar = styled.div`
     width: 100%;
   }
   position: sticky;
-  top: 73px;
-  width: 100%;
-  max-width: 30%;
+  top: 60px;
+  min-width: 320px;
+  width: 25%;
   background-color: var(--bg-color-dark-alt);
   overflow-y: auto;
-  height: calc(100vh - 73px);
+  height: calc(100vh - 61px);
   color: var(--text-color-2);
 `

@@ -17,7 +17,7 @@ const Event = ({ tournament, setCurrentTournamentId, selected }) => {
 export default Event
 
 const StyledEvent = styled.button`
-  border-bottom: 2px solid rgba(211, 211, 211, 0.1);
+  border-bottom: 1px solid rgba(211, 211, 211, 0.1);
   box-sizing: border-box;
   width: 100%;
   display: flex;
@@ -29,6 +29,7 @@ const StyledEvent = styled.button`
 
   div {
     width: 60px;
+    min-width: 60px;
     height: 60px;
     display: flex;
     align-items: center;

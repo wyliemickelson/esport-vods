@@ -19,7 +19,15 @@ export default VodList
 const StyledVodList = styled.div`
   display: flex;
   color: var(--text-color-2);
+
+  line-height: 3;
   a {
     padding: 1rem 0.7rem;
   }
+  p {
+    font-weight: 500;
+    padding-right: 1rem;
+    text-transform: uppercase;
+  }
+
 `

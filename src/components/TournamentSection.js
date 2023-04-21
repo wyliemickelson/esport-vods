@@ -37,7 +37,22 @@ const StyledTournamentSection = styled.section`
   width: 100%;
 
   .dropdown {
+    margin-left: 1rem;
+    margin-top: 1rem;
     z-index: 1;
-    max-width: 200px;
+    max-width: 250px;
+
+    .Dropdown-control, .Dropdown-menu {
+      border: 1px solid rgba(211, 211, 211, 0.2);
+    }
+
+    .Dropdown-option {
+      border-bottom: 1px solid rgba(211, 211, 211, 0.2);
+      border-right: 1px solid rgba(211, 211, 211, 0.2);
+    } 
+    * {
+      background-color: var(--bg-color-dark-alt);
+      color: var(--text-color-2);
+    }
   }
 `

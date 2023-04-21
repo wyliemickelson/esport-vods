@@ -42,6 +42,7 @@ const StyledHome = styled.section`
   }
   .main {
     display: flex;
+    flex-direction: row;
   }
 
 `

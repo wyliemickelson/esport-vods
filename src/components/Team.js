@@ -19,13 +19,13 @@ const Team = ({ team, side }) => {
   return (
     <StyledTeam>
       {side === 'left'
-      && <p>{shortenName(team.name)}</p> 
+        && <p>{shortenName(team.name)}</p>
       }
       <div className='img-container'>
         <img src={teamImg} alt='team logo' />
       </div>
       {side === 'right'
-      && <p>{shortenName(team.name)}</p> 
+        && <p>{shortenName(team.name)}</p>
       }
     </StyledTeam>
   )
@@ -39,8 +39,10 @@ const StyledTeam = styled.div`
     min-width: 120px;
 
     .img-container { 
-      width: 50px;
+      width: 60px;
+      height: 60px;
       display: flex;
+      align-items: center;
       justify-content: center;
     }
 `
