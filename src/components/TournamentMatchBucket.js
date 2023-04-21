@@ -2,31 +2,47 @@ import styled from 'styled-components';
 import VodList from './VodList';
 import Team from './Team';
 
-const TournamentMatchBucket = ({ bucket }) => {
+const TournamentMatchBucket = ({ bucket, gameType }) => {
   return (
     <StyledTournamentMatchBucket>
       {bucket.matches.map(m => {
-        return <MatchCard key={m._id} m={m} />
+        return <MatchCard key={m._id} m={m} gameType={gameType} />
       }
       )}
     </StyledTournamentMatchBucket>
   )
 }
 
-const MatchCard = ({ m }) => {
+const MatchCard = ({ m, gameType }) => {
+  const team1 = m.matchData?.team1
+  const team2 = m.matchData?.team2
 
-  const team1 = m.matchData.team1
-  const team2 = m.matchData.team2
+  const fillerTeam = {
+    name: 'TBD',
+    logoSrc:`game-icons/${gameType}.svg`
+  }
 
   return (
-    <StyledMatchCard>
-      <StyledMatchInfo>
-        <Team team={team1} side='left' />
-        <p>VS</p>
-        <Team team={team2} side='right' />
-      </StyledMatchInfo>
-      <VodList bestOf={m.matchData.bestOf} mapData={m.matchData.mapData} />
-    </StyledMatchCard>
+    <>
+      {
+        m.isCompleted
+          ? <StyledMatchCard>
+            <StyledMatchInfo>
+              <Team team={team1} side='left' />
+              <p>VS</p>
+              <Team team={team2} side='right' />
+            </StyledMatchInfo>
+            <VodList bestOf={m.matchData.bestOf} mapData={m.matchData.mapData} />
+          </StyledMatchCard>
+          : <StyledMatchCard>
+              <StyledMatchInfo>
+              <Team team={fillerTeam} side='left' />
+              <p>VS</p>
+              <Team team={fillerTeam} side='right' />
+            </StyledMatchInfo>
+          </StyledMatchCard>
+      }
+    </>
   )
 }
 

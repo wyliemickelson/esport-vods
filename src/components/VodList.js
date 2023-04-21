@@ -7,7 +7,7 @@ const VodList = ({ bestOf, mapData }) => {
       <p>Game</p>
       <div>
         {paddedMaps.map((map, i) => 
-          <a key={map?._id || i} href={map?.vod.url} target='_blank' rel='noreferrer' >{i + 1}</a>
+          <a key={map?._id || i} href={map?.vod?.url} target='_blank' rel='noreferrer' >{i + 1}</a>
         )}
       </div>
     </StyledVodList>
@@ -18,10 +18,8 @@ export default VodList
 
 const StyledVodList = styled.div`
   display: flex;
+  color: var(--text-color-2);
   a {
-    &:hover {
-      cursor: pointer;
-    }
-    padding: 1rem;
+    padding: 1rem 0.7rem;
   }
 `

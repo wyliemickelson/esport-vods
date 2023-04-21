@@ -33,6 +33,10 @@ const GlobalStyle = createGlobalStyle`
   --bg-color-lighter: #0f1519;
 }
 
+button {
+  all: unset;
+}
+
 a:link {
     text-decoration: inherit;
     color: inherit;
@@ -43,8 +47,28 @@ a:visited {
     color: inherit;
 }
 
-a:hover {
+a:hover, button:hover {
+  cursor: pointer;
   color: red;
+}
+
+* {
+  &::-webkit-scrollbar {
+    height: 14px;
+    width: 14px;
+    background-color: #0a0e13;
+    margin: 0 10px;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: #000;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #252c32;
+    -webkit-border-radius: 1ex;
+    border: 3px solid #0a0e13;
+  }
 }
 
 *, *::before, *::after {
@@ -65,6 +89,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: var(--bg-color-lighter);
   color: var(--text-color-1);
+  height: 100%;
 }
 
 img, picture, video, canvas, svg {
