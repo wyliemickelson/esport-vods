@@ -16,7 +16,10 @@ const Home = ({ tournaments }) => {
 
   const { width } = useViewPort()
   const breakpoint = 1050
+  const vodListBreakpoint = 750
   const burgerMenuBreakpoint = 600
+
+  const vodListHidden = width < vodListBreakpoint
   const isBurgerNav = width < burgerMenuBreakpoint
   const isMobile = width < breakpoint
 
@@ -36,11 +39,8 @@ const Home = ({ tournaments }) => {
         {isMobile
         ? <EventListDropdown tournaments={shownTournaments} setCurrentTournamentId={setCurrentTournamentId} currentTournamentId={currentTournamentId} eventDropdownOpen={eventDropdownOpen} setEventDropdownOpen={setEventDropdownOpen} />
         : <EventSidebar isMobile={isMobile} tournaments={shownTournaments} currentTournamentId={currentTournamentId}  setCurrentTournamentId={setCurrentTournamentId} />}
-        {currentTournamentId && tournaments.length > 0 && !eventDropdownOpen && <TournamentSection tournament={tournaments.find(t => t._id === currentTournamentId)} />}
+        {currentTournamentId && tournaments.length > 0 && !eventDropdownOpen && <TournamentSection hiddenVods={vodListHidden} tournament={tournaments.find(t => t._id === currentTournamentId)} />}
       </div>
-      <footer>
-
-      </footer>
     </StyledHome>
   )
 }

@@ -4,7 +4,7 @@ import 'react-dropdown/style.css';
 import { useState, useEffect } from 'react';
 import TournamentMatchBucket from './TournamentMatchBucket';
 
-const TournamentSection = ({ tournament }) => {
+const TournamentSection = ({ tournament, hiddenVods }) => {
   const [currentBucket, setCurrentBucket] = useState(0)
   const buckets = tournament.matchBuckets
 
@@ -24,7 +24,7 @@ const TournamentSection = ({ tournament }) => {
       {currentBucket < buckets.length &&
         <>
           <Dropdown className='dropdown' options={options} onChange={(e) => setCurrentBucket(e.value)} value={options[currentBucket]} />
-          <TournamentMatchBucket bucket={buckets[currentBucket]} gameType={tournament.details.gameType} />
+          <TournamentMatchBucket bucket={buckets[currentBucket]} gameType={tournament.details.gameType} hiddenVods={hiddenVods} />
         </>
       }
     </StyledTournamentSection>
