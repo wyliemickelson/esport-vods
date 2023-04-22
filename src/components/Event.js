@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import React from 'react'
 
-const Event = ({ tournament, setCurrentTournamentId, selected }) => {
+const Event = ({ tournament, setCurrentTournamentId, selected, onClick, isMobile }) => {
 
   const img = require(`./../assets/${tournament.details.mainImgSrc}`)
   return (
-    <StyledEvent selected={selected} onClick={() => setCurrentTournamentId(tournament._id)} >
+    <StyledEvent isMobile={isMobile} selected={selected} onClick={() => onClick(tournament)} >
       <div>
         <img src={img} alt='event banner' />
       </div>
@@ -24,6 +24,7 @@ const StyledEvent = styled.button`
   padding: 1rem;
   align-items: center;
   column-gap: 1rem;
+  background-color: var(--bg-color-dark-alt);
 
   border-right: ${props => props.selected ? '4px solid red' : '' };
 
@@ -35,4 +36,10 @@ const StyledEvent = styled.button`
     align-items: center;
     justify-content: center;
   }
+
+  ${props => props.isMobile && `
+    position: sticky;
+    z-index: 5;
+    top: 61px;
+  `}
 `

@@ -3,11 +3,18 @@ import { useState, useEffect } from 'react'
 import TournamentSection from './TournamentSection'
 import EventSidebar from './EventSidebar'
 import NavBar from './NavBar'
+import useViewPort from './useViewport'
+import EventListDropdown from './EventListDropdown'
 
 const Home = ({ tournaments }) => {
   const [currentGame, setCurrentGame] = useState(null)
   const [currentTournamentId, setCurrentTournamentId] = useState(tournaments[0]?._id)
+  const [eventDropdownOpen, setEventDropdownOpen] = useState(false)
   const shownTournaments = currentGame ? tournaments.filter(t => t.details.gameType === currentGame) : tournaments
+
+  const { width } = useViewPort()
+  const breakpoint = 1050
+  const isMobile = width < breakpoint
 
   useEffect(() => {
     if (!shownTournaments.find(t => t._id === currentTournamentId)) {
@@ -16,13 +23,15 @@ const Home = ({ tournaments }) => {
   }, [currentGame, shownTournaments, tournaments, currentTournamentId])
 
   return (
-    <StyledHome>
+    <StyledHome isMobile={isMobile}>
       <header>
         <NavBar setCurrentGame={setCurrentGame} />
       </header>
       <div className='main'>
-        <EventSidebar tournaments={shownTournaments} currentTournamentId={currentTournamentId}  setCurrentTournamentId={setCurrentTournamentId} />
-        {currentTournamentId && tournaments.length > 0 && <TournamentSection tournament={tournaments.find(t => t._id === currentTournamentId)} />}
+        {isMobile
+        ? <EventListDropdown tournaments={shownTournaments} setCurrentTournamentId={setCurrentTournamentId} currentTournamentId={currentTournamentId} eventDropdownOpen={eventDropdownOpen} setEventDropdownOpen={setEventDropdownOpen} />
+        : <EventSidebar isMobile={isMobile} tournaments={shownTournaments} currentTournamentId={currentTournamentId}  setCurrentTournamentId={setCurrentTournamentId} />}
+        {currentTournamentId && tournaments.length > 0 && !eventDropdownOpen && <TournamentSection tournament={tournaments.find(t => t._id === currentTournamentId)} />}
       </div>
       <footer>
 
@@ -42,7 +51,11 @@ const StyledHome = styled.section`
   }
   .main {
     display: flex;
-    flex-direction: row;
   }
 
+  ${props => props.isMobile && `
+    .main {
+      flex-direction: column;
+    }
+  `}
 `

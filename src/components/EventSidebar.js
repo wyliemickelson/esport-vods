@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import Event from './Event';
 
-const EventSidebar = ({ tournaments, currentTournamentId, setCurrentTournamentId }) => {
+const EventSidebar = ({ tournaments, currentTournamentId, setCurrentTournamentId, isMobile, eventClick }) => {
+
+  const defaultClick = (t) => { setCurrentTournamentId(t._id) }
+
+  eventClick = eventClick ?? defaultClick
+
   return (
-    <StyledEventSideBar>
+    <StyledEventSideBar isMobile={isMobile}>
       <h3>Events</h3>
       <div>
       {tournaments.map(t => {
         const selected = t._id === currentTournamentId
-        return <Event tournament={t} selected={selected} setCurrentTournamentId={setCurrentTournamentId} />
+        return <Event tournament={t} selected={selected} onClick={eventClick} />
       }
       )}
       </div>
@@ -32,4 +37,9 @@ const StyledEventSideBar = styled.div`
   overflow-y: auto;
   height: calc(100vh - 61px);
   color: var(--text-color-2);
+
+  ${props => props.isMobile && `
+    width: 100%;
+    height: auto;
+  `}
 `
