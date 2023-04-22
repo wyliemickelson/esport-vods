@@ -1,5 +1,5 @@
 import Home from "./components/Home";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { createGlobalStyle } from "styled-components";
 import axios from "axios";
 

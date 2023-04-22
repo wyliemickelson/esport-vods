@@ -1,46 +1,38 @@
-import styled from 'styled-components'
-import { useState, useEffect } from 'react'
-import TournamentSection from './TournamentSection'
-import EventSidebar from './EventSidebar'
-import NavBar from './NavBar'
-import useViewPort from './useViewport'
-import EventListDropdown from './EventListDropdown'
-import MobileNav from './MobileNav'
+import React from 'react'
+import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import MainContent from './MainContent';
+import NavBar from './Nav/NavBar';
+import useViewPort from './Utils/useViewport';
 
 const Home = ({ tournaments }) => {
-  const [currentGame, setCurrentGame] = useState(null)
-  const [currentTournamentId, setCurrentTournamentId] = useState(tournaments[0]?._id)
-  const [eventDropdownOpen, setEventDropdownOpen] = useState(false)
-  const [mobileNavOpen, setMobileNavOpen] = useState(false)
-  const shownTournaments = currentGame ? tournaments.filter(t => t.details.gameType === currentGame) : tournaments
+  const [currentTournament, setCurrentTournament] = useState(null)
+  const [gameFilter, setGameFilter] = useState(null)
+
+  const shownTournaments = gameFilter ? tournaments.filter(t => t.details.gameType === gameFilter) : tournaments
 
   const { width } = useViewPort()
-  const breakpoint = 1050
-  const vodListBreakpoint = 750
-  const burgerMenuBreakpoint = 600
-
-  const vodListHidden = width < vodListBreakpoint
-  const isBurgerNav = width < burgerMenuBreakpoint
-  const isMobile = width < breakpoint
+  const useMobileSidebar = width < 1050
+  const hideVodLists = width < 750
+  const mobileNav = width < 600
 
   useEffect(() => {
-    if (!shownTournaments.find(t => t._id === currentTournamentId)) {
-      setCurrentTournamentId(currentGame ? shownTournaments[0]?._id : null)
+    if (!shownTournaments.find(t => t._id === currentTournament?._id)) {
+      setCurrentTournament(gameFilter ? shownTournaments[0] : null)
     }
-  }, [currentGame, shownTournaments, tournaments, currentTournamentId])
+  }, [gameFilter, shownTournaments, currentTournament, tournaments])
 
   return (
-    <StyledHome isMobile={isMobile}>
-      {mobileNavOpen && <MobileNav setCurrentGame={setCurrentGame} setMobileNavOpen={setMobileNavOpen} />}
-      <header>
-        <NavBar setCurrentGame={setCurrentGame} isMobile={isBurgerNav} setMobileNavOpen={setMobileNavOpen} />
-      </header>
-      <div className='main'>
-        {isMobile
-        ? <EventListDropdown tournaments={shownTournaments} setCurrentTournamentId={setCurrentTournamentId} currentTournamentId={currentTournamentId} eventDropdownOpen={eventDropdownOpen} setEventDropdownOpen={setEventDropdownOpen} />
-        : <EventSidebar isMobile={isMobile} tournaments={shownTournaments} currentTournamentId={currentTournamentId}  setCurrentTournamentId={setCurrentTournamentId} />}
-        {currentTournamentId && tournaments.length > 0 && !eventDropdownOpen && <TournamentSection hiddenVods={vodListHidden} tournament={tournaments.find(t => t._id === currentTournamentId)} />}
-      </div>
+    <StyledHome>
+      <NavBar setGameFilter={setGameFilter} isMobile={mobileNav} />
+      <MainContent
+        useMobileSidebar={useMobileSidebar}
+        tournaments={shownTournaments}
+        currentTournament={currentTournament}
+        setCurrentTournament={setCurrentTournament}
+        gameFilter={gameFilter}
+        hideVodLists={hideVodLists}
+      />
     </StyledHome>
   )
 }
@@ -48,19 +40,5 @@ const Home = ({ tournaments }) => {
 export default Home
 
 const StyledHome = styled.section`
-  header {
-    position: sticky;
-    top: 0px;
-    z-index: 5;
-    background-color: var(--bg-color-dark);
-  }
-  .main {
-    display: flex;
-  }
 
-  ${props => props.isMobile && `
-    .main {
-      flex-direction: column;
-    }
-  `}
 `

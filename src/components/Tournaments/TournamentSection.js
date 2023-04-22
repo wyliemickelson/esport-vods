@@ -1,17 +1,18 @@
+import React from 'react'
 import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import MatchList from './Matches/MatchList';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css';
-import { useState, useEffect } from 'react';
-import TournamentMatchBucket from './TournamentMatchBucket';
 
-const TournamentSection = ({ tournament, hiddenVods }) => {
+const TournamentSection = ({ tournament, hideVodLists }) => {
   const [currentBucket, setCurrentBucket] = useState(0)
-  const buckets = tournament.matchBuckets
 
   useEffect(() => {
     setCurrentBucket(0)
   }, [tournament])
 
+  const buckets = tournament.matchBuckets
   const options = buckets.map((bucket, i) => {
     return {
       value: i,
@@ -23,15 +24,22 @@ const TournamentSection = ({ tournament, hiddenVods }) => {
     <StyledTournamentSection>
       {currentBucket < buckets.length &&
         <>
-          <Dropdown className='dropdown' options={options} onChange={(e) => setCurrentBucket(e.value)} value={options[currentBucket]} />
-          <TournamentMatchBucket bucket={buckets[currentBucket]} gameType={tournament.details.gameType} hiddenVods={hiddenVods} />
+          <Dropdown
+            className='dropdown'
+            options={options}
+            onChange={(e) => setCurrentBucket(e.value)}
+            value={options[currentBucket]}
+          />
+          <MatchList
+            matchBucket={buckets[currentBucket]}
+            gameType={tournament.details.gameType}
+            hideVodLists={hideVodLists}
+          />
         </>
       }
     </StyledTournamentSection>
   )
 }
-
-export default TournamentSection
 
 const StyledTournamentSection = styled.section`
   width: 100%;
@@ -56,3 +64,5 @@ const StyledTournamentSection = styled.section`
     }
   }
 `
+
+export default TournamentSection
