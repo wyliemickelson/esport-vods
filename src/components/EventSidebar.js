@@ -9,7 +9,7 @@ const EventSidebar = ({ tournaments, currentTournamentId, setCurrentTournamentId
 
   return (
     <StyledEventSideBar isMobile={isMobile}>
-      <h3>Events</h3>
+      {!isMobile && <h3>Events</h3>}
       <div>
       {tournaments.map(t => {
         const selected = t._id === currentTournamentId

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import React from 'react'
+import BurgerIcon from './BurgerIcon';
 
-const NavBar = ({ setCurrentGame }) => {
+const NavBar = ({ setCurrentGame, isMobile, setMobileNavOpen }) => {
   const games = [
     {
       src: 'assets/game-icons/lol.svg',
@@ -32,9 +33,12 @@ const NavBar = ({ setCurrentGame }) => {
 
   return (
     <StyledNavBar>
-      {games.map(game => {
+      {isMobile
+      ? <BurgerIcon setMobileNavOpen={setMobileNavOpen} />
+      : games.map(game => {
         return <StyledNavLink onClick={() => setCurrentGame(game.gameType)} key={game.name}>{game.name}</StyledNavLink>
-      })}
+      })
+      }
     </StyledNavBar>
   )
 }
@@ -43,6 +47,7 @@ export default NavBar
 
 const StyledNavBar = styled.nav`
   display: flex;
+  height: 61px;
 `
 
 const StyledNavLink = styled.a`

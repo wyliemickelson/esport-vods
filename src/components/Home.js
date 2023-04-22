@@ -5,15 +5,19 @@ import EventSidebar from './EventSidebar'
 import NavBar from './NavBar'
 import useViewPort from './useViewport'
 import EventListDropdown from './EventListDropdown'
+import MobileNav from './MobileNav'
 
 const Home = ({ tournaments }) => {
   const [currentGame, setCurrentGame] = useState(null)
   const [currentTournamentId, setCurrentTournamentId] = useState(tournaments[0]?._id)
   const [eventDropdownOpen, setEventDropdownOpen] = useState(false)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const shownTournaments = currentGame ? tournaments.filter(t => t.details.gameType === currentGame) : tournaments
 
   const { width } = useViewPort()
   const breakpoint = 1050
+  const burgerMenuBreakpoint = 600
+  const isBurgerNav = width < burgerMenuBreakpoint
   const isMobile = width < breakpoint
 
   useEffect(() => {
@@ -24,8 +28,9 @@ const Home = ({ tournaments }) => {
 
   return (
     <StyledHome isMobile={isMobile}>
+      {mobileNavOpen && <MobileNav setCurrentGame={setCurrentGame} setMobileNavOpen={setMobileNavOpen} />}
       <header>
-        <NavBar setCurrentGame={setCurrentGame} />
+        <NavBar setCurrentGame={setCurrentGame} isMobile={isBurgerNav} setMobileNavOpen={setMobileNavOpen} />
       </header>
       <div className='main'>
         {isMobile
