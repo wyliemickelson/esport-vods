@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import MainContent from './MainContent';
 import NavBar from './Nav/NavBar';
 import useViewPort from './Utils/useViewport';
+import VodPage from './Vods/VodPage';
 
 const Home = ({ tournaments }) => {
   const [currentTournament, setCurrentTournament] = useState(null)
@@ -22,6 +23,17 @@ const Home = ({ tournaments }) => {
     }
   }, [gameFilter, shownTournaments, currentTournament, tournaments])
 
+  const youtubeTestVod = {
+    url: "https://youtu.be/Ygl9i0epe80?t=2099",
+    videoId: "K_sxlIrQjnE",
+    working: true,
+  }
+  const twitchTestVod = {
+    url: "https://www.twitch.tv/videos/1556896575?t=0h59m39s",
+    videoId: "1556896575",
+    working: true,
+  }
+
   return (
     <StyledHome>
       <NavBar setGameFilter={setGameFilter} isMobile={mobileNav} />
@@ -33,6 +45,7 @@ const Home = ({ tournaments }) => {
         gameFilter={gameFilter}
         hideVodLists={hideVodLists}
       />
+      <VodPage vod={twitchTestVod} />
     </StyledHome>
   )
 }
