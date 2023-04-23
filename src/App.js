@@ -1,7 +1,10 @@
-import Home from "./components/Home";
-import { useState, useEffect} from "react";
+import Home from "./components/pages/Home";
+import { useState, useEffect } from "react";
 import { createGlobalStyle } from "styled-components";
+import { Route, Routes, Navigate } from "react-router-dom";
+import MatchPage from "./components/pages/MatchPage";
 import axios from "axios";
+import CheckGameRoute from "./components/Utils/CheckGameRoute";
 
 const App = () => {
   const [tournaments, setTournaments] = useState([])
@@ -16,7 +19,15 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Home tournaments={tournaments} />
+      <Routes>
+        <Route path="/" element={<Home tournaments={tournaments} />}>
+          <Route path=":gameType" element={<CheckGameRoute />} />
+        </Route>
+        <Route path="/match/:matchId" element={<MatchPage />}>
+          <Route path="game/:mapNumber" element={<></>} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" replace />}/>
+      </Routes>
     </>
   );
 }

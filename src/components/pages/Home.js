@@ -1,14 +1,20 @@
 import React from 'react'
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import MainContent from './MainContent';
-import NavBar from './Nav/NavBar';
-import useViewPort from './Utils/useViewport';
-import VodPage from './Vods/VodPage';
+import MainContent from '../MainContent';
+import NavBar from '../Nav/NavBar';
+import useViewPort from '../Utils/useViewport';
+import VodPage from './VodPage';
+import { useParams } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 const Home = ({ tournaments }) => {
   const [currentTournament, setCurrentTournament] = useState(null)
-  const [gameFilter, setGameFilter] = useState(null)
+  // const [gameFilter, setGameFilter] = useState(null)
+
+  const { gameType: gameFilter } = useParams()
+
+
 
   const shownTournaments = gameFilter ? tournaments.filter(t => t.details.gameType === gameFilter) : tournaments
 
@@ -36,7 +42,8 @@ const Home = ({ tournaments }) => {
 
   return (
     <StyledHome>
-      <NavBar setGameFilter={setGameFilter} isMobile={mobileNav} />
+      <NavBar  isMobile={mobileNav} />
+      <Outlet />
       <MainContent
         useMobileSidebar={useMobileSidebar}
         tournaments={shownTournaments}

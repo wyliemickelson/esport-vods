@@ -4,23 +4,23 @@ import { navEntries } from './navEntries';
 import { useState } from 'react';
 import BurgerIcon from './BurgerIcon';
 import MobileNavMenu from './MobileNavMenu';
+import { Link } from 'react-router-dom';
 
-const NavBar = ({ setGameFilter, isMobile }) => {
+const NavBar = ({ isMobile }) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const toggleMobileNav = () => setMobileNavOpen(!mobileNavOpen)
 
   return (
     <>
-      {mobileNavOpen && <MobileNavMenu setGameFilter={setGameFilter} toggleMobileNav={toggleMobileNav} />}
+      {mobileNavOpen && <MobileNavMenu toggleMobileNav={toggleMobileNav} />}
       <StyledNavBar>
         {isMobile
           ? <BurgerIcon onClick={toggleMobileNav} />
           : navEntries.map(entry =>
             <StyledNavLink
-              onClick={() => setGameFilter(entry.gameType)}
               key={entry.name}
             >
-              {entry.name}
+              <Link to={`${entry.gameType}`}>{entry.name}</Link>
             </StyledNavLink>
           )}
       </StyledNavBar>
@@ -38,7 +38,7 @@ const StyledNavBar = styled.nav`
   background-color: var(--bg-color-dark);
 `
 
-const StyledNavLink = styled.button`
+export const StyledNavLink = styled.button`
   text-transform: uppercase;
   font-size: 1.2rem;
   font-weight: 500;

@@ -1,17 +1,18 @@
 import React from 'react'
 import styled from 'styled-components';
 import { navEntries } from './navEntries';
+import { Link } from 'react-router-dom';
 
-const MobileNavMenu = ({ setGameFilter, toggleMobileNav }) => {
+const MobileNavMenu = ({ toggleMobileNav }) => {
   return (
     <StyledMobileNavMenu>
       <button onClick={toggleMobileNav}>Close</button>
       <div>
         {navEntries.map(entry => {
-          return <button onClick={() => {
-            setGameFilter(entry.gameType)
-            toggleMobileNav()
-          }} key={entry.name}>{entry.name}</button>
+          return <Link onClick={toggleMobileNav} key={entry.name}
+          to={`${entry.gameType}`}>
+            {entry.name}
+            </Link>
         })}
       </div>
     </StyledMobileNavMenu>
