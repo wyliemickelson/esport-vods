@@ -1,14 +1,12 @@
 import React from 'react'
 import TournamentSideBar from './TournamentSideBar'
-import { useState } from 'react'
 import TournamentCard from './TournamentCard'
+import styled from 'styled-components';
 
-const TournamentListDropdown = ({ tournaments, currentTournament, setCurrentTournament }) => {
-  const [open, setOpen] = useState(false)
-  const toggleOpen = () => setOpen(!open)
+const TournamentListDropdown = ({ tournaments, currentTournament, setCurrentTournament, dropdownOpen, toggleDropdown }) => {
 
   return (
-    <>
+    <StyledTournamentListDropdown>
       {currentTournament &&
         <TournamentCard
           extraStyles={`
@@ -17,19 +15,24 @@ const TournamentListDropdown = ({ tournaments, currentTournament, setCurrentTour
             top: 61px;
           `}
           tournament={currentTournament} 
-          onClick={toggleOpen}
+          onClick={toggleDropdown}
         />
       }
-      {open && 
+      {dropdownOpen && 
         <TournamentSideBar
           isMobile={true}
-          eventClick={toggleOpen}
+          eventClick={toggleDropdown}
           tournaments={tournaments}
           currentTournament={currentTournament}
           setCurrentTournament={setCurrentTournament}
         />}
-    </>
+    </StyledTournamentListDropdown>
   )
 }
+
+const StyledTournamentListDropdown = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 export default TournamentListDropdown

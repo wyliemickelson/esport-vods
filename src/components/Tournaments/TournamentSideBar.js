@@ -19,6 +19,8 @@ const TournamentSideBar = ({ tournaments, currentTournament, setCurrentTournamen
 export default TournamentSideBar
 
 const StyledTournamentSideBar = styled.div`
+  display: flex;
+  flex-direction: column;
   h3 {
     padding: 1rem;
     border-bottom: 2px solid rgba(211, 211, 211, 0.1);
@@ -29,12 +31,11 @@ const StyledTournamentSideBar = styled.div`
   min-width: 320px;
   width: 25%;
   background-color: var(--bg-color-dark-alt);
-  overflow-y: auto;
   height: calc(100vh - 61px);
   color: var(--text-color-2);
 
   ${props => props.isMobile && `
     width: 100%;
-    height: auto;
+    height: calc(100vh - 154px)
   `}
 `
