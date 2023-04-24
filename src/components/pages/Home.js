@@ -12,10 +12,10 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate()
+
+  const { gameType: gameFilter, tournamentId, tournamentName } = useParams()
   const [currentTournament, setCurrentTournament] = useState(null)
   const tournaments = useContext(TournamentsContext)
-  const { gameType: gameFilter, tournamentId, tournamentName } = useParams()
-
   const shownTournaments = tournaments.filter(t => t.details.gameType === gameFilter)
 
   const { width } = useViewPort()
@@ -23,17 +23,27 @@ const Home = () => {
   const hideVodLists = width < 750
   const mobileNav = width < 600
 
+  // set tournament if id is given in url
+  useEffect(() => {
+    if (tournamentId) {
+      setCurrentTournament(tournaments.find(t => t._id === tournamentId))
+    }
+  }, [tournamentId, tournaments])
+
+  // change url to defaulted tournament
+  useEffect(() => {
+    if (currentTournament) {
+      navigate(`/${gameFilter}/${currentTournament._id}/${currentTournament.details.title.replaceAll(' ', '-')}`)
+    }
+  }, [currentTournament, gameFilter, navigate, tournaments])
+
+  // set default tournament if no id in url
   const setDefaultTournament = () => {
     if (!shownTournaments.find(t => t._id === currentTournament?._id) && tournaments.length > 0) {
       setCurrentTournament(shownTournaments[0])
     }
   }
-  setDefaultTournament()
-
-  useEffect(() => {
-    if (!tournaments.length > 0) return
-    navigate(`/${gameFilter}/${currentTournament?._id}/${currentTournament?.details.title.replaceAll(' ', '-')}`)
-  }, [currentTournament, gameFilter, navigate, tournaments])
+  if (!tournamentId) setDefaultTournament()
 
 
   const youtubeTestVod = {
