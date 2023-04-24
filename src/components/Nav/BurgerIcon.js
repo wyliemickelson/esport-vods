@@ -17,7 +17,7 @@ const StyledBurgerIcon = styled.button`
     align-items: center;
     justify-content: center;
     box-sizing: content-box;
-    padding: 1rem;
+    padding: 0.5rem;
 `
 
 export default BurgerIcon
