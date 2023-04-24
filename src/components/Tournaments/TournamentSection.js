@@ -5,7 +5,7 @@ import MatchList from './Matches/MatchList';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css';
 
-const TournamentSection = ({ tournament, hideVodLists }) => {
+const TournamentSection = ({ tournament }) => {
   const [currentBucket, setCurrentBucket] = useState(0)
 
   useEffect(() => {
@@ -33,7 +33,6 @@ const TournamentSection = ({ tournament, hideVodLists }) => {
           <MatchList
             matchBucket={buckets[currentBucket]}
             gameType={tournament.details.gameType}
-            hideVodLists={hideVodLists}
           />
         </>
       }

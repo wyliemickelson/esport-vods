@@ -4,11 +4,15 @@ import MatchInfo from './MatchInfo';
 import VodList from './VodList';
 import { useState, useEffect } from 'react';
 import SpoilerCover from './SpoilerCover';
+import useViewPort from '../../Utils/useViewport';
 
-const MatchCard = ({ match, gameType, hideVodLists}) => {
+const MatchCard = ({ match, gameType }) => {
   const [vodsShown, setVodsShown] = useState(false)
   const [revealed, setRevealed] = useState(match.revealed)
+  const { width } = useViewPort()
+  const hideVodLists = width < 750
   const showVods = match.isCompleted && (!hideVodLists || vodsShown)
+
   const toggleVodsShown = () => {
     if (hideVodLists) {
       setVodsShown(!vodsShown)

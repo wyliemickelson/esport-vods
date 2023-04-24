@@ -1,9 +1,24 @@
 import React from 'react'
+import burgerSVG from './../../assets/burger-menu.svg'
+import styled from 'styled-components';
+import IconContainer from '../Utils/IconContainer';
 
 const BurgerIcon = ({ onClick }) => {
   return (
-    <button onClick={onClick}>BurgerIcon</button>
+    <StyledBurgerIcon onClick={onClick}>
+      <img src={burgerSVG} alt='burger menu icon' />
+    </StyledBurgerIcon>
   )
 }
+
+const StyledBurgerIcon = styled.button`
+    max-width: 50px;
+    max-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: content-box;
+    padding: 1rem;
+`
 
 export default BurgerIcon

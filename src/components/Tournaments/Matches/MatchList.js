@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import MatchCard from './MatchCard';
 
-const MatchList = ({ matchBucket, gameType, hideVodLists }) => {
+const MatchList = ({ matchBucket, gameType }) => {
   
   return (
     <StyledMatchList>
@@ -11,7 +11,6 @@ const MatchList = ({ matchBucket, gameType, hideVodLists }) => {
           key={match._id}
           match={match}
           gameType={gameType}
-          hideVodLists={hideVodLists}
         />  
       )}
     </StyledMatchList>

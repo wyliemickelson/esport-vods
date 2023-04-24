@@ -5,10 +5,13 @@ import { useState } from 'react';
 import BurgerIcon from './BurgerIcon';
 import MobileNavMenu from './MobileNavMenu';
 import { Link } from 'react-router-dom';
+import useViewPort from '../Utils/useViewport';
 
-const NavBar = ({ isMobile }) => {
+const NavBar = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const toggleMobileNav = () => setMobileNavOpen(!mobileNavOpen)
+  const { width } = useViewPort()
+  const isMobile = width < 600
 
   return (
     <>
@@ -17,7 +20,7 @@ const NavBar = ({ isMobile }) => {
         {isMobile
           ? <BurgerIcon onClick={toggleMobileNav} />
           : navEntries.map(entry => 
-            <Link to={`/${entry.gameType}`} key={entry.name}>
+            <Link replace={true} to={`/${entry.gameType}`} key={entry.name}>
               <StyledNavLink>
                 {entry.name}
               </StyledNavLink>
@@ -34,7 +37,7 @@ const StyledNavBar = styled.nav`
 
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 5;
   background-color: var(--bg-color-dark);
 `
 

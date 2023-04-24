@@ -4,15 +4,15 @@ import IconContainer from '../Utils/IconContainer';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-const TournamentCard = ({ tournament, onClick, isCurrent, extraStyles }) => {
+const TournamentCard = ({ tournament, onClick, isCurrent}) => {
   const img = require(`./../../assets/${tournament.details.mainImgSrc}`)
   const { gameType } = useParams()
 
   const urlTitle = tournament.details.title.replaceAll(' ', '-')
 
   return (
-    <Link to={`/${gameType}/${tournament._id}/${urlTitle}`}>
-      <StyledTournamentCard onClick={onClick} isCurrent={isCurrent} extraStyles={extraStyles}>
+    <Link replace={true} to={`/${gameType}/${tournament._id}/${urlTitle}`}>
+      <StyledTournamentCard onClick={onClick} isCurrent={isCurrent}>
         <IconContainer src={img} alt='event icon' />
         <p>{tournament.details.title}</p>
       </StyledTournamentCard>
@@ -33,6 +33,4 @@ const StyledTournamentCard = styled.button`
   background-color: var(--bg-color-dark-alt);
 
   border-right: ${props => props.isCurrent ? '4px solid red' : ''};
-
-  ${props => props.extraStyles}
 `

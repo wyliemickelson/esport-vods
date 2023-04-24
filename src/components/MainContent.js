@@ -4,10 +4,13 @@ import TournamentSideBar from './Tournaments/TournamentSideBar'
 import TournamentSection from './Tournaments/TournamentSection'
 import TournamentListDropdown from './Tournaments/TournamentListDropdown';
 import { useState } from 'react';
+import useViewPort from './Utils/useViewport';
 
-const MainContent = ({ tournaments, currentTournament, setCurrentTournament, gameFilter, useMobileSidebar, hideVodLists }) => {
+const MainContent = ({ tournaments, currentTournament, setCurrentTournament, gameFilter}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen)
+  const { width } = useViewPort()
+  const useMobileSidebar = width < 1050
 
   return (
     <StyledMainContent useMobileSidebar={useMobileSidebar}>
@@ -25,7 +28,7 @@ const MainContent = ({ tournaments, currentTournament, setCurrentTournament, gam
             setCurrentTournament={setCurrentTournament}
           />
       }
-      {currentTournament && !dropdownOpen && <TournamentSection tournament={currentTournament} hideVodLists={hideVodLists} />}
+      {currentTournament && !dropdownOpen && <TournamentSection tournament={currentTournament} />}
     </StyledMainContent>
   )
 }

@@ -9,16 +9,11 @@ const TournamentListDropdown = ({ tournaments, currentTournament, setCurrentTour
     <StyledTournamentListDropdown>
       {currentTournament &&
         <TournamentCard
-          extraStyles={`
-            position: sticky;
-            z-index: 5;
-            top: 61px;
-          `}
-          tournament={currentTournament} 
+          tournament={currentTournament}
           onClick={toggleDropdown}
         />
       }
-      {(dropdownOpen || !currentTournament) && 
+      {(dropdownOpen || !currentTournament) &&
         <TournamentSideBar
           isMobile={true}
           eventClick={toggleDropdown}
@@ -33,6 +28,9 @@ const TournamentListDropdown = ({ tournaments, currentTournament, setCurrentTour
 const StyledTournamentListDropdown = styled.div`
   display: flex;
   flex-direction: column;
+  position: sticky;
+  z-index: 4;
+  top: 61px;
 `
 
 export default TournamentListDropdown
