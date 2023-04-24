@@ -1,7 +1,6 @@
 import React from 'react'
 import burgerSVG from './../../assets/burger-menu.svg'
 import styled from 'styled-components';
-import IconContainer from '../Utils/IconContainer';
 
 const BurgerIcon = ({ onClick }) => {
   return (

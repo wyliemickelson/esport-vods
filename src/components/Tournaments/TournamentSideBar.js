@@ -2,14 +2,13 @@ import React from 'react'
 import TournamentList from './TournamentList'
 import styled from 'styled-components';
 
-const TournamentSideBar = ({ tournaments, currentTournament, setCurrentTournament, isMobile, eventClick }) => {
+const TournamentSideBar = ({ tournaments, currentTournament, isMobile, eventClick }) => {
   return (
     <StyledTournamentSideBar isMobile={isMobile} currentTournament={currentTournament}>
       {!isMobile && <h3>Events</h3>}
       <TournamentList
         tournaments={tournaments}
         currentTournament={currentTournament}
-        setCurrentTournament={setCurrentTournament}
         eventClick={eventClick}
       />
     </StyledTournamentSideBar>

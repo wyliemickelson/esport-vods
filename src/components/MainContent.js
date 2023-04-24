@@ -6,7 +6,7 @@ import TournamentListDropdown from './Tournaments/TournamentListDropdown';
 import { useState } from 'react';
 import useViewPort from './Utils/useViewport';
 
-const MainContent = ({ tournaments, currentTournament, setCurrentTournament, gameFilter}) => {
+const MainContent = ({ tournaments, currentTournament, gameFilter}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen)
   const { width } = useViewPort()
@@ -18,14 +18,12 @@ const MainContent = ({ tournaments, currentTournament, setCurrentTournament, gam
         ? <TournamentListDropdown 
             tournaments={tournaments}
             currentTournament={currentTournament}
-            setCurrentTournament={setCurrentTournament}
             dropdownOpen={dropdownOpen}
             toggleDropdown={toggleDropdown}
           />
         : <TournamentSideBar
             tournaments={tournaments}
             currentTournament={currentTournament}
-            setCurrentTournament={setCurrentTournament}
           />
       }
       {currentTournament && !dropdownOpen && <TournamentSection tournament={currentTournament} />}

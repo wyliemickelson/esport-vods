@@ -2,7 +2,7 @@ import React from 'react'
 import TournamentCard from './TournamentCard';
 import styled from 'styled-components';
 
-const TournamentList = ({ tournaments, currentTournament, setCurrentTournament, eventClick }) => {
+const TournamentList = ({ tournaments, currentTournament, eventClick }) => {
   return (
     <StyledTournamentList>
       {tournaments.map(t => {
@@ -12,10 +12,7 @@ const TournamentList = ({ tournaments, currentTournament, setCurrentTournament, 
             key={t._id}
             isCurrent={isCurrent}
             tournament={t}
-            onClick={() => {
-              setCurrentTournament(t)
-              if (eventClick) eventClick()
-            }}
+            onClick={eventClick}
           />
         )
       }
