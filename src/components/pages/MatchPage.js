@@ -19,7 +19,6 @@ const MatchPage = () => {
 
   const match = findMatch()
   const vod = match?.matchData.mapData[vodNumber]?.vod
-  const nextVod = match?.matchData.mapData[Number(vodNumber) + 1]?.vod
 
   return (
     <>

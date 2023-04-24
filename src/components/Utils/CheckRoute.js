@@ -2,7 +2,6 @@ import React from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { TournamentsContext } from '../../contexts/TournamentsContext'
-import { Outlet } from 'react-router-dom'
 import Home from '../pages/Home'
 import MatchPage from '../pages/MatchPage'
 

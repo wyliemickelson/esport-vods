@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import { Route, Routes, Navigate } from "react-router-dom";
-import MatchPage from "./components/pages/MatchPage";
 import CheckRoute from "./components/Utils/CheckRoute";
 import TournamentsContextProvider from "./contexts/TournamentsContext";
 
