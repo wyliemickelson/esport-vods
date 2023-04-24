@@ -4,15 +4,9 @@ import VodFrame from '../Vods/VodFrame';
 
 const VodPage = ({ vod }) => {
 
-  const getType = () => {
-    const url = new URL(vod.url)
-    if (url.origin.includes('twitch')) return 'twitch'
-    return 'youtube'
-  }
-
   return (
     <StyledVodPage>
-      <VodFrame vod={vod} type={getType()} />
+      <VodFrame vod={vod} />
     </StyledVodPage>
   )
 }

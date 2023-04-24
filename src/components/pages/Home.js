@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { TournamentsContext } from '../../contexts/TournamentsContext';
 import { useNavigate } from 'react-router-dom';
+import CheckRoute from '../Utils/CheckRoute';
 
 const Home = () => {
   const navigate = useNavigate()
@@ -43,19 +44,7 @@ const Home = () => {
       setCurrentTournament(shownTournaments[0])
     }
   }
-  if (!tournamentId) setDefaultTournament()
-
-
-  const youtubeTestVod = {
-    url: "https://youtu.be/Ygl9i0epe80?t=2099",
-    videoId: "K_sxlIrQjnE",
-    working: true,
-  }
-  const twitchTestVod = {
-    url: "https://www.twitch.tv/videos/1556896575?t=0h59m39s",
-    videoId: "1556896575",
-    working: true,
-  }
+  if (!tournamentId && gameFilter) setDefaultTournament()
 
   return (
     <StyledHome>
@@ -69,7 +58,6 @@ const Home = () => {
         gameFilter={gameFilter}
         hideVodLists={hideVodLists}
       />
-      <VodPage vod={twitchTestVod} />
     </StyledHome>
   )
 }

@@ -20,7 +20,7 @@ const MatchCard = ({ match, gameType, hideVodLists}) => {
         match={match}
         gameType={gameType}
       />
-      {showVods &&  <VodList bestOf={match.matchData.bestOf} mapData={match.matchData.mapData} />}
+      {showVods &&  <VodList match={match} />}
     </StyledMatchCard>
   )
 }

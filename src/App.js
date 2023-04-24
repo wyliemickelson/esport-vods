@@ -13,12 +13,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navigate to='/leagueoflegends' />} >
         </Route>
-        <Route path=":gameType" element={<><Home /> <CheckRoute type='game' /></>}>
+        <Route path=":gameType" element={<CheckRoute type='game' />}>
           <Route path=":tournamentId/:tournamentTitle" element={<CheckRoute type='tournament' />} />
         </Route>
-        <Route path="match/:matchId" element={<MatchPage />}>
-          <Route path="game/:mapNumber" element={<></>} />
-        </Route>
+        <Route path="/vods/:tournamentId/:tournamentTitle/:matchId/:vodNumber" element={<MatchPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </TournamentsContextProvider>
@@ -71,6 +69,7 @@ a:hover, button:hover {
   &::-webkit-scrollbar-thumb {
     background: #252c32;
     -webkit-border-radius: 1ex;
+    border-radius: 1ex;
     border: 3px solid #0a0e13;
   }
 }

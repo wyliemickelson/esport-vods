@@ -1,7 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const VodFrame = ({ vod, type }) => {
+const VodFrame = ({ vod }) => {
+
+  const getType = () => {
+    const url = new URL(vod.url)
+    if (url.origin.includes('twitch')) return 'twitch'
+    return 'youtube'
+  }
 
   const formatSrc = () => {
     let src = new URL(vod.url)
@@ -11,7 +17,7 @@ const VodFrame = ({ vod, type }) => {
       twitch: `https://player.twitch.tv/?video=${vod.videoId}&time=${time}&autoplay=false&parent=localhost`,
     }
 
-    return formats[type]
+    return formats[getType()]
   }
   formatSrc()
 

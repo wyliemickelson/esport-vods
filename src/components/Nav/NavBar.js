@@ -5,12 +5,10 @@ import { useState } from 'react';
 import BurgerIcon from './BurgerIcon';
 import MobileNavMenu from './MobileNavMenu';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
 const NavBar = ({ isMobile }) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const toggleMobileNav = () => setMobileNavOpen(!mobileNavOpen)
-  const { gameType } = useParams()
 
   return (
     <>
@@ -18,20 +16,12 @@ const NavBar = ({ isMobile }) => {
       <StyledNavBar>
         {isMobile
           ? <BurgerIcon onClick={toggleMobileNav} />
-          : navEntries.map(entry => {
-            if (gameType === entry.gameType) {
-              return <StyledNavLink key={entry.name}>
-                {entry.name}
-              </StyledNavLink>
-            } else {
-              return <Link to={`/${entry.gameType}`} key={entry.name}>
+          : navEntries.map(entry => 
+            <Link to={`/${entry.gameType}`} key={entry.name}>
               <StyledNavLink>
                 {entry.name}
               </StyledNavLink>
             </Link>
-            }
-          }
-
           )}
       </StyledNavBar>
     </>
