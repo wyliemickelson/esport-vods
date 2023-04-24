@@ -5,10 +5,10 @@ import axios from 'axios'
 export const TournamentsContext = createContext()
 
 const TournamentsContextProvider = ({ children }) => {
-  const [tournaments, setTournaments] = useState([])
+  const [tournaments, setTournaments] = useState(null)
 
   useEffect(() => {
-    axios.get('/api/tournaments')
+    axios.get('http://localhost:3001/api/tournaments')
       .then(res => res.data)
       .then(tournaments => setTournaments(tournaments))
       .catch(e => console.error(e))

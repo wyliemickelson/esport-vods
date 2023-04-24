@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const TournamentSideBar = ({ tournaments, currentTournament, setCurrentTournament, isMobile, eventClick }) => {
   return (
-    <StyledTournamentSideBar isMobile={isMobile}>
+    <StyledTournamentSideBar isMobile={isMobile} currentTournament={currentTournament}>
       {!isMobile && <h3>Events</h3>}
       <TournamentList
         tournaments={tournaments}
@@ -29,7 +29,7 @@ const StyledTournamentSideBar = styled.div`
   position: sticky;
   top: 61px;
   min-width: 320px;
-  width: 25%;
+  width: ${props => props.currentTournament ? '25%' : '100%'};
   background-color: var(--bg-color-dark-alt);
   height: calc(100vh - 61px);
   color: var(--text-color-2);

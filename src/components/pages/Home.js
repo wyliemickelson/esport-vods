@@ -1,15 +1,11 @@
 import React from 'react'
-import styled from 'styled-components';
 import { useState, useEffect, useContext } from 'react';
+import { Outlet, useParams, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import MainContent from '../MainContent';
 import NavBar from '../Nav/NavBar';
 import useViewPort from '../Utils/useViewport';
-import VodPage from './VodPage';
-import { useParams } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
 import { TournamentsContext } from '../../contexts/TournamentsContext';
-import { useNavigate } from 'react-router-dom';
-import CheckRoute from '../Utils/CheckRoute';
 
 const Home = () => {
   const navigate = useNavigate()
@@ -17,7 +13,7 @@ const Home = () => {
   const { gameType: gameFilter, tournamentId, tournamentName } = useParams()
   const [currentTournament, setCurrentTournament] = useState(null)
   const tournaments = useContext(TournamentsContext)
-  const shownTournaments = tournaments.filter(t => t.details.gameType === gameFilter)
+  const shownTournaments = tournaments?.filter(t => t.details.gameType === gameFilter) ?? []
 
   const { width } = useViewPort()
   const useMobileSidebar = width < 1050
@@ -26,25 +22,24 @@ const Home = () => {
 
   // set tournament if id is given in url
   useEffect(() => {
-    if (tournamentId) {
-      setCurrentTournament(tournaments.find(t => t._id === tournamentId))
-    }
+    setCurrentTournament(tournaments?.find(t => t._id === tournamentId))
   }, [tournamentId, tournaments])
 
-  // change url to defaulted tournament
-  useEffect(() => {
-    if (currentTournament) {
-      navigate(`/${gameFilter}/${currentTournament._id}/${currentTournament.details.title.replaceAll(' ', '-')}`)
-    }
-  }, [currentTournament, gameFilter, navigate, tournaments])
+  // // change url to defaulted tournament
+  // useEffect(() => {
+  //   if (currentTournament) {
+  //     navigate(`/${gameFilter}/${currentTournament._id}/${currentTournament.details.title.replaceAll(' ', '-')}`, { replace: true })
+  //   }
+  //   console.log('used')
+  // }, [tournaments, currentTournament, tournamentId, gameFilter, navigate])
 
-  // set default tournament if no id in url
-  const setDefaultTournament = () => {
-    if (!shownTournaments.find(t => t._id === currentTournament?._id) && tournaments.length > 0) {
-      setCurrentTournament(shownTournaments[0])
-    }
-  }
-  if (!tournamentId && gameFilter) setDefaultTournament()
+  // // set default tournament if no id in url
+  // const setDefaultTournament = () => {
+  //   if (!shownTournaments.find(t => t._id === currentTournament?._id) && tournaments.length > 0) {
+  //     setCurrentTournament(shownTournaments[0])
+  //   }
+  // }
+  // if (!tournamentId && gameFilter) setDefaultTournament()
 
   return (
     <StyledHome>

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import Team from './Team';
 
-const MatchInfo = ({ match, gameType, onClick }) => {
+const MatchInfo = ({ match, gameType, onClick, revealed }) => {
 
   const fillerTeam = {
     name: 'TBD',
@@ -13,7 +13,7 @@ const MatchInfo = ({ match, gameType, onClick }) => {
   const team2 = match.isCompleted ? match.matchData.team2 : fillerTeam
 
   return (
-    <StyledMatchInfo onClick={onClick}>
+    <StyledMatchInfo onClick={onClick} revealed={revealed}>
       <Team team={team1} side='left' />
       <p>VS</p>
       <Team team={team2} side='right' />
@@ -30,4 +30,8 @@ const StyledMatchInfo = styled.div`
   align-items: center;
   justify-content: space-between;
   align-items: center;
+
+  ${props => !props.revealed && `
+    filter: blur(15px) grayscale(1);
+  `}
 `

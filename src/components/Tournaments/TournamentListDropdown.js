@@ -18,7 +18,7 @@ const TournamentListDropdown = ({ tournaments, currentTournament, setCurrentTour
           onClick={toggleDropdown}
         />
       }
-      {dropdownOpen && 
+      {(dropdownOpen || !currentTournament) && 
         <TournamentSideBar
           isMobile={true}
           eventClick={toggleDropdown}

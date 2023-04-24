@@ -3,17 +3,17 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-const VodList = ({ match }) => {
+const VodList = ({ match, revealed }) => {
   const mapData = match.matchData.mapData
   const bestOf = match.matchData.bestOf
-  const { tournamentId, tournamentTitle } = useParams()
+  const { tournamentId } = useParams()
   const paddedMaps = Array.from({ ...mapData, length: bestOf })
   return (
-    <StyledVodList>
+    <StyledVodList revealed={revealed}>
       <p>Game</p>
       <div>
         {paddedMaps.map((map, i) =>
-          <Link to={`/vods/${tournamentId}/${tournamentTitle}/${match._id}/${i}`} key={map?._id || i}>
+          <Link to={`/vods/${tournamentId}/${match._id}/${i}`} key={map?._id || i}>
             <span>{i + 1}</span>
           </Link>
         )}
@@ -35,6 +35,10 @@ const StyledVodList = styled.div`
     padding-right: 1rem;
     text-transform: uppercase;
   }
+
+  ${props => !props.revealed && `
+    filter: blur(15px) grayscale(1);
+  `}
 `
 
 export default VodList

@@ -1,4 +1,3 @@
-import Home from "./components/pages/Home";
 import { createGlobalStyle } from "styled-components";
 import { Route, Routes, Navigate } from "react-router-dom";
 import MatchPage from "./components/pages/MatchPage";
@@ -13,10 +12,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navigate to='/leagueoflegends' />} >
         </Route>
-        <Route path=":gameType" element={<CheckRoute type='game' />}>
+        <Route path="/:gameType" element={<CheckRoute type='game' />}>
           <Route path=":tournamentId/:tournamentTitle" element={<CheckRoute type='tournament' />} />
         </Route>
-        <Route path="/vods/:tournamentId/:tournamentTitle/:matchId/:vodNumber" element={<MatchPage />} />
+        <Route path="/vods/:tournamentId/:matchId/:vodNumber" element={<CheckRoute type='vod' />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </TournamentsContextProvider>
