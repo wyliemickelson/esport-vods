@@ -3,20 +3,20 @@ import TournamentSideBar from './TournamentSideBar'
 import TournamentCard from './TournamentCard'
 import styled from 'styled-components';
 
-const TournamentListDropdown = ({ tournaments, currentTournament, dropdownOpen, toggleDropdown }) => {
-
+const TournamentListDropdown = ({ tournaments, currentTournament, dropdownOpen, setDropdownOpen }) => {
+  console.log(dropdownOpen)
   return (
     <StyledTournamentListDropdown>
       {currentTournament &&
         <TournamentCard
           tournament={currentTournament}
-          onClick={toggleDropdown}
+          onClick={() => setDropdownOpen(!dropdownOpen)}
         />
       }
       {(dropdownOpen || !currentTournament) &&
         <TournamentSideBar
           isMobile={true}
-          eventClick={toggleDropdown}
+          eventClick={() => setDropdownOpen(!dropdownOpen)}
           tournaments={tournaments}
           currentTournament={currentTournament}
         />}
