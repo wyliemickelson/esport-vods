@@ -1,15 +1,22 @@
 import React from 'react'
 import styled from 'styled-components';
 import IconContainer from '../Utils/IconContainer';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const TournamentCard = ({ tournament, onClick, isCurrent, extraStyles }) => {
   const img = require(`./../../assets/${tournament.details.mainImgSrc}`)
+  const { gameType } = useParams()
+
+  const urlTitle = tournament.details.title.replaceAll(' ', '-')
 
   return (
-    <StyledTournamentCard onClick={onClick} isCurrent={isCurrent} extraStyles={extraStyles}>
-      <IconContainer src={img} alt='event icon' />
-      <p>{tournament.details.title}</p>
-    </StyledTournamentCard>
+    <Link to={`/${gameType}/${tournament._id}/${urlTitle}`}>
+      <StyledTournamentCard onClick={onClick} isCurrent={isCurrent} extraStyles={extraStyles}>
+        <IconContainer src={img} alt='event icon' />
+        <p>{tournament.details.title}</p>
+      </StyledTournamentCard>
+    </Link>
   )
 }
 

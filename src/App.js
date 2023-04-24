@@ -1,34 +1,27 @@
 import Home from "./components/pages/Home";
-import { useState, useEffect } from "react";
 import { createGlobalStyle } from "styled-components";
 import { Route, Routes, Navigate } from "react-router-dom";
 import MatchPage from "./components/pages/MatchPage";
-import axios from "axios";
-import CheckGameRoute from "./components/Utils/CheckGameRoute";
+import CheckRoute from "./components/Utils/CheckRoute";
+import TournamentsContextProvider from "./contexts/TournamentsContext";
 
 const App = () => {
-  const [tournaments, setTournaments] = useState([])
-
-  useEffect(() => {
-    axios.get('/api/tournaments')
-      .then(res => res.data)
-      .then(tournaments => setTournaments(tournaments))
-      .catch(e => console.error(e))
-  }, [])
 
   return (
-    <>
+    <TournamentsContextProvider>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<Home tournaments={tournaments} />}>
-          <Route path=":gameType" element={<CheckGameRoute />} />
+        <Route path="/" element={<Navigate to='/leagueoflegends' />} >
         </Route>
-        <Route path="/match/:matchId" element={<MatchPage />}>
+        <Route path=":gameType" element={<><Home /> <CheckRoute type='game' /></>}>
+          <Route path=":tournamentId/:tournamentTitle" element={<CheckRoute type='tournament' />} />
+        </Route>
+        <Route path="match/:matchId" element={<MatchPage />}>
           <Route path="game/:mapNumber" element={<></>} />
         </Route>
-        <Route path="*" element={<Navigate to="/" replace />}/>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </>
+    </TournamentsContextProvider>
   );
 }
 

@@ -10,8 +10,8 @@ const MobileNavMenu = ({ toggleMobileNav }) => {
       <div>
         {navEntries.map(entry => {
           return <Link onClick={toggleMobileNav} key={entry.name}
-          to={`${entry.gameType}`}>
-            {entry.name}
+          to={`/${entry.gameType}`}>
+            <button>{entry.name}</button>
             </Link>
         })}
       </div>
