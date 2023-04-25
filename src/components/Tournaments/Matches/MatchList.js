@@ -1,17 +1,38 @@
 import React from 'react'
 import styled from 'styled-components';
 import MatchCard from './MatchCard';
+import DayCard from './DayCard';
+import moment from 'moment';
 
 const MatchList = ({ matchBucket, gameType }) => {
-  
+
+  const dayBuckets = () => {
+    const dayBuckets = {}
+    matchBucket.matches.forEach(m => {
+      const currentDays = Object.keys(dayBuckets)
+      const dayFormat = moment(m.dateStart).format('YYYYMMDD')
+      if (currentDays.includes(dayFormat)) {
+        dayBuckets[dayFormat].push(m)
+      } else {
+        dayBuckets[dayFormat] = [m]
+      }
+    })
+    return Object.values(dayBuckets)
+  }
+
   return (
     <StyledMatchList>
-      {matchBucket.matches.map(match => 
-        <MatchCard
-          key={match._id}
-          match={match}
-          gameType={gameType}
-        />  
+      {dayBuckets().map((dayBucket, i) =>
+        <React.Fragment key={i}>
+          <DayCard day={i + 1} date={dayBucket[0].dateStart} />
+          {dayBucket.map(match =>
+            <MatchCard
+              key={match._id}
+              match={match}
+              gameType={gameType}
+            />
+          )}
+        </React.Fragment>
       )}
     </StyledMatchList>
   )
@@ -19,11 +40,6 @@ const MatchList = ({ matchBucket, gameType }) => {
 
 const StyledMatchList = styled.div`
   padding: 1rem;
-  .divider {
-    height: 30px;
-    margin: 0 1rem;
-    border-left: 1px solid rgba(211, 211, 211, 0.2);
-  }
 `
 
 export default MatchList
