@@ -10,11 +10,11 @@ const MatchCard = ({ match, gameType }) => {
   const [vodsShown, setVodsShown] = useState(false)
   const [revealed, setRevealed] = useState(match.revealed)
   const { width } = useViewPort()
-  const hideVodLists = width < 750
-  const showVods = match.isCompleted && (!hideVodLists || vodsShown)
+  const isMobile = width < 750
+  const showVods = match.isCompleted && (!isMobile || vodsShown)
 
   const toggleVodsShown = () => {
-    if (hideVodLists) {
+    if (isMobile) {
       setVodsShown(!vodsShown)
     }
   }
@@ -26,13 +26,16 @@ const MatchCard = ({ match, gameType }) => {
   }, [match])
   
   return (
-    <StyledMatchCard hideVodLists={hideVodLists}>
+    <StyledMatchCard isMobile={isMobile}>
       <MatchInfo
         onClick={toggleVodsShown}
         match={match}
         gameType={gameType}
+        isMobile={isMobile}
+        vodsShown={vodsShown}
         revealed={revealed}
       />
+      {isMobile && vodsShown && <Divider />}
       {showVods &&  <VodList match={match} revealed={revealed} />}
       {!revealed && <SpoilerCover onClick={() => setRevealed(true)} />}
     </StyledMatchCard>
@@ -49,7 +52,14 @@ const StyledMatchCard = styled.div`
   padding: 1rem;
   border-bottom: 1px solid rgba(211, 211, 211, 0.1);
 
-  ${props => props.hideVodLists && `
+  ${props => props.isMobile && `
     flex-direction: column;
   `}
+`
+
+const Divider = styled.div`
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  border-bottom: 1px solid rgba(211, 211, 211, 0.1);
 `

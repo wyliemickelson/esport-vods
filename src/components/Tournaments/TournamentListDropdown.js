@@ -4,7 +4,6 @@ import TournamentCard from './TournamentCard'
 import styled from 'styled-components';
 
 const TournamentListDropdown = ({ tournaments, currentTournament, dropdownOpen, setDropdownOpen }) => {
-  console.log(dropdownOpen)
   return (
     <StyledTournamentListDropdown>
       {currentTournament &&

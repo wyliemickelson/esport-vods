@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Team from './Team';
 
 const MatchInfo = ({ match, gameType, onClick, revealed }) => {
-
   const fillerTeam = {
     name: 'TBD',
     logoSrc: `game-icons/${gameType}.svg`

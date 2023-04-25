@@ -25,10 +25,10 @@ const VodList = ({ match, revealed }) => {
 const StyledVodList = styled.div`
   display: flex;
   color: var(--text-color-2);
-  line-height: 3;
+  line-height: 1;
 
   span {
-    padding: 1rem 0.7rem;
+    padding: 0 0.7rem;
   }
   p {
     font-weight: 500;

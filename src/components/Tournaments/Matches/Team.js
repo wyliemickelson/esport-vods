@@ -19,11 +19,13 @@ const Team = ({ team, side }) => {
     return name.slice(0, 3).toUpperCase()
   }
 
+  const shownName = shortenName(team.name)
+
   return (
     <StyledTeam>
-      {side === 'left' && <p>{shortenName(team.name)}</p>}
+      {side === 'left' && <p>{shownName}</p>}
       <IconContainer src={teamIcon} alt='team icon' />
-      {side === 'right' && <p>{shortenName(team.name)}</p>}
+      {side === 'right' && <p>{shownName}</p>}
     </StyledTeam>
   )
 }

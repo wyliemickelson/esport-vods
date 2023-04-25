@@ -9,7 +9,7 @@ const App = () => {
     <TournamentsContextProvider>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<Navigate to='/leagueoflegends' />} >
+        <Route path="/" element={<Navigate replace to='/leagueoflegends' />} >
         </Route>
         <Route path="/:gameType" element={<CheckRoute type='game' />}>
           <Route path=":tournamentId/:tournamentTitle" element={<CheckRoute type='tournament' />} />
