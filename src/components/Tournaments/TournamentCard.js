@@ -32,5 +32,7 @@ const StyledTournamentCard = styled.button`
   column-gap: 1rem;
   background-color: var(--bg-color-dark-alt);
 
-  border-right: ${props => props.isCurrent ? '4px solid red' : ''};
+  border-right: ${props => props.isCurrent && `
+    4px solid var(--color-acc-1)};
+  `}
 `

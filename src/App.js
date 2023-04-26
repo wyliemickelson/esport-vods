@@ -29,9 +29,11 @@ const GlobalStyle = createGlobalStyle`
   --text-color-1: #fff;
   --text-color-2: #8fa3b0;
 
-  --bg-color-dark: #201A1A;
-  --bg-color-dark-alt: #302826;
-  --bg-color-lighter: #403434;
+  --bg-color-dark: #14151c;
+  --bg-color-dark-alt: #22232e;
+  --bg-color-lighter:	#1d1e27;
+
+  --color-acc-1: #ECB365;
 }
 
 button {
@@ -50,26 +52,26 @@ a:visited {
 
 a:hover, button:hover {
   cursor: pointer;
-  color: red;
+  color: var(--color-acc-1);
 }
 
 * {
   &::-webkit-scrollbar {
     height: 14px;
     width: 14px;
-    background-color: #0a0e13;
+    background-color: var(--bg-color-dark-alt);
     margin: 0 10px;
   }
 
   &::-webkit-scrollbar-corner {
-    background: #000;
+    background: var(--bg-color-dark);
   }
   
   &::-webkit-scrollbar-thumb {
-    background: #252c32;
+    background: #2f3840;
     -webkit-border-radius: 1ex;
     border-radius: 1ex;
-    border: 3px solid #0a0e13;
+    border: 3px solid var(--bg-color-dark-alt);
   }
 }
 

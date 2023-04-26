@@ -2,12 +2,8 @@ import React from 'react'
 import TournamentSideBar from './TournamentSideBar'
 import TournamentCard from './TournamentCard'
 import styled from 'styled-components';
-import { useContext } from 'react';
-import { CurrentTournamentContext } from '../../contexts/CurrentTournamentContext';
 
-const TournamentListDropdown = ({ tournaments, dropdownOpen, setDropdownOpen }) => {
-  const currentTournament = useContext(CurrentTournamentContext)
-
+const TournamentListDropdown = ({ tournaments, dropdownOpen, currentTournament, setDropdownOpen }) => {
   return (
     <StyledTournamentListDropdown>
       {currentTournament &&
@@ -16,7 +12,7 @@ const TournamentListDropdown = ({ tournaments, dropdownOpen, setDropdownOpen }) 
           onClick={() => setDropdownOpen(!dropdownOpen)}
         />
       }
-      {(dropdownOpen || !currentTournament) &&
+      {dropdownOpen &&
         <TournamentSideBar
           isMobile={true}
           eventClick={() => setDropdownOpen(false)}

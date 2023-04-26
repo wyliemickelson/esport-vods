@@ -58,7 +58,7 @@ const StyledTournamentSection = styled.section`
       border-right: 1px solid rgba(211, 211, 211, 0.2);
     } 
     * {
-      background-color: var(--bg-color-dark-alt);
+      background-color: var(--bg-color-dark);
       color: var(--text-color-2);
     }
   }

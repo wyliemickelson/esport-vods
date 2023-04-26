@@ -13,7 +13,6 @@ const MainContent = ({ tournaments, currentTournament, gameFilter}) => {
   const { tournamentId } = useParams()
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const { width } = useViewPort()
-  // const currentTournament = useContext(CurrentTournamentContext)
   const { isLoading } = useContext(LoadedTournamentsContext)
   const useMobileSidebar = width < 1050
 
@@ -36,7 +35,7 @@ const MainContent = ({ tournaments, currentTournament, gameFilter}) => {
           />
       }
       {currentTournament && !dropdownOpen && !isLoading && <TournamentSection tournament={currentTournament} />}
-      {isLoading && <StyledLoading isMobile={useMobileSidebar}><ReactLoading type='spin' width='15%' /></StyledLoading>}
+      {isLoading && <StyledLoading isMobile={useMobileSidebar}><ReactLoading type='spin' width='5%' /></StyledLoading>}
     </StyledMainContent>
   )
 }
