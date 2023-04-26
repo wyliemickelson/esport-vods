@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 const TournamentCard = ({ tournament, onClick, isCurrent}) => {
-  const img = require(`./../../assets/${tournament.details.mainImgSrc}`)
+  const img = require(`./../../assets/${tournament?.details?.logoSrc}`)
   const { gameType } = useParams()
 
   const urlTitle = tournament.details.title.replaceAll(' ', '-')

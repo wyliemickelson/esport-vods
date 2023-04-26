@@ -1,10 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
 import IconContainer from '../../Utils/IconContainer';
+import { useContext } from 'react';
+import { CurrentTournamentContext } from '../../../contexts/CurrentTournamentContext';
 
 const Team = ({ team, side }) => {
+  const currentTournament = useContext(CurrentTournamentContext)
+  const participants = currentTournament.details.participants
+  const matchedTeam = participants.find(p => p._id === team._id)
 
-  const teamIcon = require(`./../../../assets/${team.logoSrc}`)
+  const teamIcon = require(`./../../../assets/${matchedTeam.logoSrc}`)
 
   const shortenName = (name) => {
     if (name.length <= 3) {
@@ -19,7 +24,7 @@ const Team = ({ team, side }) => {
     return name.slice(0, 3).toUpperCase()
   }
 
-  const shownName = shortenName(team.name)
+  const shownName = shortenName(matchedTeam.name)
 
   return (
     <StyledTeam>

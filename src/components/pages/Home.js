@@ -4,12 +4,14 @@ import { Outlet, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import MainContent from '../MainContent';
 import NavBar from '../Nav/NavBar';
-import { TournamentsContext } from '../../contexts/TournamentsContext';
+import { TournamentsDetailsContext } from '../../contexts/TournamentsDetailsContext';
+import { CurrentTournamentContext } from '../../contexts/CurrentTournamentContext';
 
 const Home = () => {
   const { gameType: gameFilter, tournamentId } = useParams()
-  const tournaments = useContext(TournamentsContext)
-  const currentTournament = tournaments?.find(t => t._id === tournamentId)
+  const tournaments = useContext(TournamentsDetailsContext)
+  const currentTournament = useContext(CurrentTournamentContext)
+
   const shownTournaments = tournaments?.filter(t => t.details.gameType === gameFilter) ?? []
 
   return (

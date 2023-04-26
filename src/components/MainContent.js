@@ -3,14 +3,18 @@ import styled from 'styled-components';
 import TournamentSideBar from './Tournaments/TournamentSideBar'
 import TournamentSection from './Tournaments/TournamentSection'
 import TournamentListDropdown from './Tournaments/TournamentListDropdown';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import useViewPort from './Utils/useViewport';
 import { useParams } from 'react-router-dom';
+import { LoadedTournamentsContext } from '../contexts/LoadedTournamentsContext';
+import ReactLoading from 'react-loading'
 
 const MainContent = ({ tournaments, currentTournament, gameFilter}) => {
   const { tournamentId } = useParams()
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const { width } = useViewPort()
+  // const currentTournament = useContext(CurrentTournamentContext)
+  const { isLoading } = useContext(LoadedTournamentsContext)
   const useMobileSidebar = width < 1050
 
   useEffect(() => {
@@ -31,7 +35,8 @@ const MainContent = ({ tournaments, currentTournament, gameFilter}) => {
             currentTournament={currentTournament}
           />
       }
-      {currentTournament && !dropdownOpen && <TournamentSection tournament={currentTournament} />}
+      {currentTournament && !dropdownOpen && !isLoading && <TournamentSection tournament={currentTournament} />}
+      {isLoading && <StyledLoading isMobile={useMobileSidebar}><ReactLoading type='spin' width='15%' /></StyledLoading>}
     </StyledMainContent>
   )
 }
@@ -43,5 +48,16 @@ const StyledMainContent = styled.div`
 
   ${props => props.useMobileSidebar && `
     flex-direction: column;
+  `}
+`
+
+const StyledLoading = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${props => props.isMobile && `
+    height: 80vh
   `}
 `

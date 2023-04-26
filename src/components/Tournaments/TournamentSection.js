@@ -13,7 +13,7 @@ const TournamentSection = ({ tournament }) => {
   }, [tournament])
 
   const buckets = tournament.matchBuckets
-  const options = buckets.map((bucket, i) => {
+  const options = buckets?.map((bucket, i) => {
     return {
       value: i,
       label: bucket.title,
@@ -22,7 +22,7 @@ const TournamentSection = ({ tournament }) => {
 
   return (
     <StyledTournamentSection>
-      {currentBucket < buckets.length &&
+      {currentBucket < buckets?.length &&
         <>
           <Dropdown
             className='dropdown'

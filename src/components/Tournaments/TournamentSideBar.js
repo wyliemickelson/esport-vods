@@ -1,12 +1,17 @@
 import React from 'react'
 import TournamentList from './TournamentList'
 import styled from 'styled-components';
+import { useContext } from 'react';
+import { LoadedTournamentsContext } from '../../contexts/LoadedTournamentsContext';
+import { CurrentTournamentContext } from '../../contexts/CurrentTournamentContext';
 
-const TournamentSideBar = ({ tournaments, currentTournament, isMobile, eventClick }) => {
+const TournamentSideBar = ({ tournaments, isMobile, eventClick }) => {
+  const { isLoading } = useContext(LoadedTournamentsContext)
+  const currentTournament = useContext(CurrentTournamentContext)
   const showHeader = !isMobile || (isMobile && !currentTournament)
 
   return (
-    <StyledTournamentSideBar isMobile={isMobile} currentTournament={currentTournament}>
+    <StyledTournamentSideBar isMobile={isMobile} currentTournament={currentTournament} isLoading={isLoading}>
       {showHeader && <h3>Events</h3>}
       <TournamentList
         tournaments={tournaments}
@@ -30,7 +35,7 @@ const StyledTournamentSideBar = styled.div`
   position: sticky;
   top: 61px;
   min-width: 320px;
-  width: ${props => props.currentTournament ? '25%' : '100%'};
+  width: ${props => props.currentTournament || props.isLoading ? '25%' : '100%'};
   background-color: var(--bg-color-dark-alt);
   height: calc(100vh - 61px);
   color: var(--text-color-2);
@@ -38,5 +43,9 @@ const StyledTournamentSideBar = styled.div`
   ${props => props.isMobile && props.currentTournament && `
     width: 100%;
     height: calc(100vh - 154px)
+  `}
+
+${props => props.isMobile && `
+    width: 100%;
   `}
 `

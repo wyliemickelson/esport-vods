@@ -1,23 +1,24 @@
 import { createGlobalStyle } from "styled-components";
 import { Route, Routes, Navigate } from "react-router-dom";
 import CheckRoute from "./components/Utils/CheckRoute";
-import TournamentsContextProvider from "./contexts/TournamentsContext";
+import TournamentsDetailsContextProvider from "./contexts/TournamentsDetailsContext";
+import LoadedTournamentsContextProvider from "./contexts/LoadedTournamentsContext";
 
 const App = () => {
-
   return (
-    <TournamentsContextProvider>
-      <GlobalStyle />
-      <Routes>
-        <Route path="/" element={<Navigate replace to='/leagueoflegends' />} >
-        </Route>
-        <Route path="/:gameType" element={<CheckRoute type='game' />}>
-          <Route path=":tournamentId/:tournamentTitle" element={<CheckRoute type='tournament' />} />
-        </Route>
-        <Route path="/vods/:tournamentId/:matchId/:vodNumber" element={<CheckRoute type='vod' />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </TournamentsContextProvider>
+    <TournamentsDetailsContextProvider>
+      <LoadedTournamentsContextProvider>
+        <GlobalStyle />
+        <Routes>
+          <Route path="/" element={<Navigate replace to='/leagueoflegends' />} />
+          <Route path="/:gameType" element={<CheckRoute type='game' />}>
+            <Route path=":tournamentId/:tournamentTitle" element={<CheckRoute type='tournament' />} />
+          </Route>
+          <Route path="/vods/:tournamentId/:matchId/:vodNumber" element={<CheckRoute type='vod' />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </LoadedTournamentsContextProvider>
+    </TournamentsDetailsContextProvider>
   );
 }
 
@@ -28,9 +29,9 @@ const GlobalStyle = createGlobalStyle`
   --text-color-1: #fff;
   --text-color-2: #8fa3b0;
 
-  --bg-color-dark: #111111;
-  --bg-color-dark-alt: #0a0e13;
-  --bg-color-lighter: #0f1519;
+  --bg-color-dark: #201A1A;
+  --bg-color-dark-alt: #302826;
+  --bg-color-lighter: #403434;
 }
 
 button {
