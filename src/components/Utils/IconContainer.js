@@ -12,8 +12,7 @@ const IconContainer = ({ src, alt, size, flipped }) => {
 export default IconContainer
 
 const StyledIconContainer = styled.div`
-    width: ${props => props.size};
-    min-width: ${props => props.size};
+    max-width: ${props => props.size};
     height: ${props => props.size};
     display: flex;
     align-items: center;

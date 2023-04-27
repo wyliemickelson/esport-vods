@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import Team from './Team';
 
-const MatchInfo = ({ match, gameType, onClick, revealed }) => {
+const MatchInfo = ({ match, gameType, onClick, revealed, extraStyles, fullName, imgSize }) => {
   const fillerTeam = {
     name: 'TBD',
     logoSrc: `game-icons/${gameType}.svg`
@@ -12,12 +12,17 @@ const MatchInfo = ({ match, gameType, onClick, revealed }) => {
   const team2 = match.isCompleted ? match.matchData.team2 : fillerTeam
 
   return (
-    <StyledMatchInfo onClick={onClick} revealed={revealed}>
-      <Team team={team1} side='left' />
+    <StyledMatchInfo onClick={onClick} revealed={revealed} extraStyles={extraStyles}>
+      <Team team={team1} fullName={fullName} side='left' imgSize={imgSize} />
       <p>VS</p>
-      <Team team={team2} side='right' />
+      <Team team={team2} fullName={fullName} side='right' imgSize={imgSize} />
     </StyledMatchInfo>
   )
+}
+
+MatchInfo.defaultProps = {
+  revealed: true,
+  fullName: false,
 }
 
 export default MatchInfo
@@ -33,4 +38,6 @@ const StyledMatchInfo = styled.div`
   ${props => !props.revealed && `
     filter: blur(15px) grayscale(1);
   `}
+
+  ${props => props.extraStyles}
 `

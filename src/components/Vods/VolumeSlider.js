@@ -36,6 +36,10 @@ const StyledVolumeSlider = styled.div`
   display: flex;
   column-gap: 1rem;
 
+  input {
+    width: 75px;
+  }
+
   margin: 0.5rem;
     padding: 1rem;
     border-radius: 1rem;

@@ -4,10 +4,11 @@ import IconContainer from '../../Utils/IconContainer';
 import { useContext } from 'react';
 import { CurrentTournamentContext } from '../../../contexts/CurrentTournamentContext';
 
-const Team = ({ team, side }) => {
+const Team = ({ team, side, fullName = false, imgSize }) => {
   const currentTournament = useContext(CurrentTournamentContext)
   const participants = currentTournament.details.participants
   const matchedTeam = participants.find(p => p._id === team._id)
+  console.log(fullName)
 
   const teamIcon = require(`./../../../assets/${matchedTeam.logoSrc}`)
 
@@ -24,12 +25,12 @@ const Team = ({ team, side }) => {
     return name.slice(0, 3).toUpperCase()
   }
 
-  const shownName = shortenName(matchedTeam.name)
+  const shownName = fullName ? matchedTeam.name : shortenName(matchedTeam.name)
 
   return (
-    <StyledTeam>
+    <StyledTeam imgSize={imgSize}>
       {side === 'left' && <p>{shownName}</p>}
-      <IconContainer src={teamIcon} alt='team icon' />
+      <IconContainer src={teamIcon} alt='team icon' size={imgSize} />
       {side === 'right' && <p>{shownName}</p>}
     </StyledTeam>
   )
@@ -40,7 +41,7 @@ const StyledTeam = styled.div`
   column-gap: 1.5rem;
   align-items: center;
   justify-content: center;
-  min-width: 120px;
+  min-width: ${props => props.imgSize ? '' : '120px'}
 `
 
 export default Team

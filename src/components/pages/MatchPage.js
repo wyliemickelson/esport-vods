@@ -5,7 +5,8 @@ import { useContext } from 'react'
 import NavBar from '../Nav/NavBar'
 import VodPlaceholder from '../Vods/VodPlaceholder'
 import Player from '../Vods/Player'
-import PlayerPausedContextProvider from '../../contexts/PlayerPausedContext'
+import PlayerContextProvider from '../../contexts/PlayerContext'
+import MatchPageDetails from '../Vods/MatchPageDetails'
 
 const MatchPage = () => {
   const { tournamentId, matchId, vodNumber } = useParams()
@@ -20,11 +21,11 @@ const MatchPage = () => {
   const vod = match?.matchData?.mapData[vodNumber]?.vod
 
   return (
-    <PlayerPausedContextProvider>
+    <PlayerContextProvider>
       <NavBar />
-      { vod ? <Player vod={vod} /> : <VodPlaceholder />}
-      {Number(vodNumber) + 1 < match?.matchData?.bestOf && <Link to={`/vods/${tournamentId}/${matchId}/${Number(vodNumber) + 1}`}>Next Game</Link>}
-    </PlayerPausedContextProvider>
+      { vod ? <Player vod={vod} match={match} /> : <VodPlaceholder />}
+      <MatchPageDetails match={match} />
+    </PlayerContextProvider>
   )
 }
 
