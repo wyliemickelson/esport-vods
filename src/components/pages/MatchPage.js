@@ -1,10 +1,10 @@
 import React from 'react'
-import VodFrame from '../Vods/VodFrame'
 import { useParams, Link } from 'react-router-dom'
 import { CurrentTournamentContext } from '../../contexts/CurrentTournamentContext'
 import { useContext } from 'react'
 import NavBar from '../Nav/NavBar'
 import VodPlaceholder from '../Vods/VodPlaceholder'
+import Player from '../Vods/Player'
 
 const MatchPage = () => {
   const { tournamentId, matchId, vodNumber } = useParams()
@@ -21,7 +21,7 @@ const MatchPage = () => {
   return (
     <>
       <NavBar />
-      { vod ? <VodFrame vod={vod} /> : <VodPlaceholder />}
+      { vod ? <Player vod={vod} /> : <VodPlaceholder />}
       {Number(vodNumber) + 1 < match?.matchData?.bestOf && <Link to={`/vods/${tournamentId}/${matchId}/${Number(vodNumber) + 1}`}>Next Game</Link>}
     </>
   )

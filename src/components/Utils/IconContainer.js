@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const IconContainer = ({ src, alt }) => {
+const IconContainer = ({ src, alt, size, flipped }) => {
   return (
-    <StyledIconContainer>
+    <StyledIconContainer size={size} flipped={flipped}>
       <img src={src} alt={alt} />
     </StyledIconContainer>
   )
@@ -12,10 +12,19 @@ const IconContainer = ({ src, alt }) => {
 export default IconContainer
 
 const StyledIconContainer = styled.div`
-    width: 60px;
-    min-width: 60px;
-    height: 60px;
+    width: ${props => props.size};
+    min-width: ${props => props.size};
+    height: ${props => props.size};
     display: flex;
     align-items: center;
     justify-content: center;
+
+    ${props => props.flipped && `
+      transform: scaleX(-1);
+    `}
 `
+
+IconContainer.defaultProps = {
+  size: '60px',
+  flipped: false,
+}
