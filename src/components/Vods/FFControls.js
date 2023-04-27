@@ -22,7 +22,7 @@ const FFControls = ({ seek, reversed }) => {
   return (
     <StyledFFControls reversed={reversed}>
       {times.map(time => 
-        <StyledFFButton onClick={() => seek(time.seconds)}>
+        <StyledFFButton onClick={() => seek(time.seconds)} key={time.text}>
           <IconContainer src={fastForwardIcon} flipped={reversed} size='30px' />
           <p>{time.text}</p>
         </StyledFFButton>

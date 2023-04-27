@@ -8,7 +8,7 @@ import { TournamentsDetailsContext } from '../../contexts/TournamentsDetailsCont
 import { CurrentTournamentContext } from '../../contexts/CurrentTournamentContext';
 
 const Home = () => {
-  const { gameType: gameFilter, tournamentId } = useParams()
+  const { gameType: gameFilter } = useParams()
   const tournaments = useContext(TournamentsDetailsContext)
   const currentTournament = useContext(CurrentTournamentContext)
 

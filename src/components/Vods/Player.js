@@ -1,15 +1,17 @@
 import React from 'react'
-import { useRef } from 'react'
-import { TwitchEmbed } from 'react-twitch-embed'
+import { useRef, useContext } from 'react'
 import PlayerControls from './PlayerControls';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
+import { PlayerPausedContext } from '../../contexts/PlayerPausedContext';
+import TwitchEmbed from './TwitchEmbed';
 
 const Player = ({ vod }) => {
   const Player = useRef()
+  const { setIsPaused } = useContext(PlayerPausedContext)
 
   let src = new URL(vod.url)
-  const startTime = src.searchParams.get('t') ?? 0
+  const start = src.searchParams.get('t') ?? 0
   const type = src.origin.includes('twitch') ? 'twitch' : 'youtube'
 
   const controls = {
@@ -17,35 +19,53 @@ const Player = ({ vod }) => {
       play: () => Player.current?.play(),
       pause: () => Player.current?.pause(),
       seek: (seconds) => Player.current?.seek(Player.current?.getCurrentTime() + seconds),
+      fullscreen: () => requestFullScreen(),
+      setVolume: (newVolume) => Player.current?.setVolume(newVolume),
     },
     youtube: {
       play: () => Player.current?.playVideo(),
       pause: () => Player.current?.pauseVideo(),
       seek: (seconds) => Player.current?.seekTo(Player.current?.getCurrentTime() + seconds),
+      fullscreen: () => requestFullScreen(),
+      setVolume: (newVolume) => Player.current?.setVolume(newVolume * 100),
     }
   }
 
+  function requestFullScreen() {
+    // Supports most browsers and their versions.
+    const element = document.querySelector('#playerwrapper iframe')
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+    if (requestMethod) { // Native full screen.
+        requestMethod.call(element);
+    }
+}
+
   return (
     <StyledPlayer>
-      <PlayerWrapper>
+      <PlayerWrapper id='playerwrapper'>
         {type === 'twitch' &&
           <TwitchEmbed
-            video={vod.videoId}
-            onVideoReady={(e) => Player.current = e }
-            autoplay={false}
-            hideControls={true}
-            time={startTime}
-            width='100%'
-            height=''
+            vod={vod}
+            onVideoReady={e => {
+              Player.current = e
+            }}
           />
         }
         {type === 'youtube' &&
           <YouTube
             videoId={vod.videoId}
-            onReady={(e) => Player.current = e.target}
+            onReady={(e) => {
+              Player.current = e.target
+              Player.current.setVolume(50)
+            }}
+            onStateChange={(e) => {
+              if (e.data === 1) setIsPaused(false)
+              if (e.data === 2) setIsPaused(true)
+            }}
             opts={{
               width: '100%',
               height: '',
+              start,
               playerVars: {
                 autoplay: false,
                 controls: 0,
@@ -60,7 +80,7 @@ const Player = ({ vod }) => {
 }
 
 const StyledPlayer = styled.div`
-  max-width: 1250px;
+  max-width: 1500px;
   width: 90%;
   margin: 0 auto;
   margin-top: 2rem;
