@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { CurrentTournamentContext } from '../../contexts/CurrentTournamentContext'
 import { useContext } from 'react'
 import NavBar from '../Nav/NavBar'
-import VodPlaceholder from '../Vods/VodPlaceholder'
+import VodError from '../Vods/VodError'
 import Player from '../Vods/Player'
 import PlayerContextProvider from '../../contexts/PlayerContext'
 import MatchPageDetails from '../Vods/MatchPageDetails'
@@ -20,10 +20,12 @@ const MatchPage = () => {
   const match = findMatch()
   const vod = match?.matchData?.mapData[vodNumber]?.vod
 
+  // if vod is null, it is intentional
+
   return (
     <PlayerContextProvider>
       <NavBar />
-      { vod ? <Player vod={vod} match={match} /> : <VodPlaceholder />}
+      { vod && vod.working ? <Player vod={vod} match={match} /> : <VodError vod={vod} />}
       <MatchPageDetails match={match} />
     </PlayerContextProvider>
   )
