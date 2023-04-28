@@ -5,10 +5,14 @@ import YouTube from 'react-youtube';
 import styled from 'styled-components';
 import { PlayerContext } from '../../contexts/PlayerContext';
 import TwitchEmbed from './TwitchEmbed';
+import useViewPort from '../Utils/useViewport';
 
 const Player = ({ vod, match }) => {
   const Player = useRef()
   const { setIsPaused } = useContext(PlayerContext)
+  const { width } = useViewPort()
+  const useCustomControls = width > 800
+
 
   let src = new URL(vod.url)
   const start = src.searchParams.get('t') ?? 0
@@ -27,7 +31,11 @@ const Player = ({ vod, match }) => {
       pause: () => Player.current?.pauseVideo(),
       seek: (seconds) => Player.current?.seekTo(Player.current?.getCurrentTime() + seconds),
       fullscreen: () => requestFullScreen(),
-      setVolume: (newVolume) => Player.current?.setVolume(newVolume * 100),
+      setVolume: (newVolume) => {
+        try {
+          Player.current?.setVolume(newVolume * 100)
+        } catch {return}
+      }
     }
   }
 
@@ -46,6 +54,7 @@ const Player = ({ vod, match }) => {
         {type === 'twitch' &&
           <TwitchEmbed
             vod={vod}
+            useCustomControls={useCustomControls}
             onVideoReady={e => {
               Player.current = e
               Player.current?.setQuality('chunked')
@@ -56,8 +65,8 @@ const Player = ({ vod, match }) => {
           <YouTube
             videoId={vod.videoId}
             onReady={(e) => {
-              Player.current = e.target
-              Player.current.setVolume(50)
+              Player.current = e?.target
+              Player.current?.setVolume(50)
             }}
             onStateChange={(e) => {
               if (e.data === 1) setIsPaused(false)
@@ -69,12 +78,12 @@ const Player = ({ vod, match }) => {
               start,
               playerVars: {
                 autoplay: false,
-                controls: 0,
+                controls: useCustomControls ? 0 : 1,
               }
             }} />
         }
       </PlayerWrapper>
-      <PlayerControls controls={controls[type]} match={match} />
+      <PlayerControls controls={controls[type]} useControls={useCustomControls} />
     </StyledPlayer>
 
   )

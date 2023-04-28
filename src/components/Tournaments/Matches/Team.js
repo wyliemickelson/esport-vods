@@ -8,7 +8,6 @@ const Team = ({ team, side, fullName = false, imgSize }) => {
   const currentTournament = useContext(CurrentTournamentContext)
   const participants = currentTournament.details.participants
   const matchedTeam = participants.find(p => p._id === team._id)
-  console.log(fullName)
 
   const teamIcon = require(`./../../../assets/${matchedTeam.logoSrc}`)
 

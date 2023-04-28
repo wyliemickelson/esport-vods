@@ -3,7 +3,7 @@ import { useEffect, useContext, useRef } from 'react'
 import { useParams } from 'react-router-dom';
 import { PlayerContext } from '../../contexts/PlayerContext';
 
-const TwitchEmbed = ({ vod, onVideoReady }) => {
+const TwitchEmbed = ({ vod, onVideoReady, useCustomControls }) => {
   const { setIsPaused } = useContext(PlayerContext)
   const Player = useRef()
   const Loading = useRef(false)
@@ -12,7 +12,7 @@ const TwitchEmbed = ({ vod, onVideoReady }) => {
   useEffect(() => {
     Loading.current = false
     document.getElementById('player').innerHTML = ''
-  }, [tournamentId, matchId, vodNumber])
+  }, [tournamentId, matchId, vodNumber, useCustomControls])
 
   // load the player once the script loads
   useEffect(() => {
@@ -28,7 +28,7 @@ const TwitchEmbed = ({ vod, onVideoReady }) => {
       const options = {
         video: vod.videoId,
         autoplay: false,
-        controls: false,
+        controls: !useCustomControls,
         time: time,
       }
       Player.current = new window.Twitch.Player('player', options)
@@ -39,7 +39,7 @@ const TwitchEmbed = ({ vod, onVideoReady }) => {
       })
     });
     document.body.appendChild(script);
-  }, [vod, setIsPaused, onVideoReady])
+  }, [vod, setIsPaused, onVideoReady, useCustomControls])
 
   return (
     <div id='player' />

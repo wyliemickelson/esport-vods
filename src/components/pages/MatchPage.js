@@ -20,8 +20,6 @@ const MatchPage = () => {
   const match = findMatch()
   const vod = match?.matchData?.mapData[vodNumber]?.vod
 
-  // if vod is null, it is intentional
-
   return (
     <PlayerContextProvider>
       <NavBar />

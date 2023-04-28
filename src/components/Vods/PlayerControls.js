@@ -9,15 +9,14 @@ import VolumeSlider from './VolumeSlider';
 import { PlayerContext } from '../../contexts/PlayerContext';
 import useViewPort from '../Utils/useViewport';
 
-const PlayerControls = ({ controls, match }) => {
+const PlayerControls = ({ controls, useControls }) => {
   const { play, pause, seek, fullscreen, setVolume } = controls
   const { isPaused } = useContext(PlayerContext)
   const { width } = useViewPort()
-  console.log(width)
 
   return (
     <>
-      {width > 800 &&
+      {useControls &&
         <ControlsContainer>
           {width > 1100 && <Container width={width}></Container>}
 
