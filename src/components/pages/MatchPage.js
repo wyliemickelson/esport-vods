@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { CurrentTournamentContext } from '../../contexts/CurrentTournamentContext'
 import { useContext } from 'react'
 import NavBar from '../Nav/NavBar'
@@ -9,7 +9,7 @@ import PlayerContextProvider from '../../contexts/PlayerContext'
 import MatchPageDetails from '../Vods/MatchPageDetails'
 
 const MatchPage = () => {
-  const { tournamentId, matchId, vodNumber } = useParams()
+  const { matchId, vodNumber } = useParams()
   const currentTournament = useContext(CurrentTournamentContext)
 
   const findMatch = () => {
