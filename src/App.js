@@ -36,6 +36,12 @@ const GlobalStyle = createGlobalStyle`
   --color-acc-1: #ECB365;
 }
 
+@media screen and (min-width: 1000px) {
+  * {
+    font-size: 1.1rem;
+  }
+}
+
 button {
   all: unset;
 }

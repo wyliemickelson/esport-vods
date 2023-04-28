@@ -35,14 +35,14 @@ const StyledTournamentSideBar = styled.div`
   position: sticky;
   top: 61px;
   min-width: 320px;
-  width: ${props => props.currentTournament || props.isLoading ? '25%' : '100%'};
+  width: ${props => props.currentTournament || props.isLoading ? '33%' : '25%'};
   background-color: var(--bg-color-dark-alt);
   height: calc(100vh - 61px);
   color: var(--text-color-2);
 
   ${props => props.isMobile && props.currentTournament && `
     width: 100%;
-    height: calc(100vh - 154px)
+    height: calc(100vh - 154px);
   `}
 
 ${props => props.isMobile && `

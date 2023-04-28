@@ -23,13 +23,18 @@ const VodList = ({ match, revealed }) => {
 }
 
 const StyledVodList = styled.div`
+  grid-column: 4;
   display: flex;
   color: var(--text-color-2);
-  line-height: 1;
+  padding: 0.5rem;
 
-  span {
-    padding: 0 0.7rem;
+  a {
+    padding: 0.7rem;
   }
+
+  /* span {
+    padding: 0 0.7rem;
+  } */
   p {
     font-weight: 500;
     padding-right: 1rem;

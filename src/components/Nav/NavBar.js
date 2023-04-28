@@ -6,10 +6,14 @@ import BurgerIcon from './BurgerIcon';
 import MobileNavMenu from './MobileNavMenu';
 import { Link } from 'react-router-dom';
 import useViewPort from '../Utils/useViewport';
+import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
 
 const NavBar = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
-  const toggleMobileNav = () => setMobileNavOpen(!mobileNavOpen)
+  const toggleMobileNav = () => {
+    mobileNavOpen ? enableBodyScroll(document) : disableBodyScroll(document)
+    setMobileNavOpen(!mobileNavOpen)
+  }
   const { width } = useViewPort()
   const isMobile = width < 600
 
@@ -33,6 +37,7 @@ const NavBar = () => {
 
 const StyledNavBar = styled.nav`
   display: flex;
+  align-items: center;
   height: 61px;
 
   position: sticky;

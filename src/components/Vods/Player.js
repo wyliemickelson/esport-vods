@@ -90,16 +90,13 @@ const Player = ({ vod, match }) => {
 }
 
 const StyledPlayer = styled.div`
-  /* width: 90%;
-  margin: 0 auto;
-  margin-top: 2rem; */
+
 `
 
 const PlayerWrapper = styled.div`
     max-height: 85vh;
     overflow: hidden;
   > div {
-    box-sizing: content-box;
     max-height: 85vh;
     position: relative;
     width: 100%;

@@ -24,7 +24,7 @@ const PlayerControls = ({ controls, useControls }) => {
             <FFControls seek={seek} reversed />
 
             <StyledIconButton onClick={() => isPaused ? play() : pause()}>
-              <IconContainer src={isPaused ? playIcon : pauseIcon} size='30px' />
+              <IconContainer src={isPaused ? playIcon : pauseIcon} size='30px' padding='0'/>
             </StyledIconButton>
 
             <FFControls seek={seek} />
@@ -34,7 +34,7 @@ const PlayerControls = ({ controls, useControls }) => {
             <StyledPlayerControls>
               <VolumeSlider updateVolume={setVolume} />
               <StyledIconButton onClick={fullscreen}>
-                <IconContainer src={fullscreenIcon} size='30px' />
+                <IconContainer src={fullscreenIcon} size='30px' padding='0' />
               </StyledIconButton>
             </StyledPlayerControls>
           </Container>
@@ -46,13 +46,13 @@ const PlayerControls = ({ controls, useControls }) => {
 }
 
 const Container = styled.div`
-  ${props => props.width > 1100 && `width: 280px`}
+  ${props => props.width > 1100 && `width: 300px`}
 
 `
 
 const ControlsContainer = styled.div`
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row;
     justify-content: space-between;
     margin: 0 auto;
     margin-top: 1rem;
@@ -70,12 +70,11 @@ export const StyledIconButton = styled.button`
 const StyledPlayerControls = styled.div`
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
     border-radius: 1rem;
     padding: 0.6rem 1rem;
     background-color: var(--bg-color-dark);
     align-items: center;
-
-    ${props => props.width && `width: ${props.width}`}
   `
 
 export default PlayerControls

@@ -1,9 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
+import useViewPort from './useViewport';
 
-const IconContainer = ({ src, alt, size, flipped }) => {
+const IconContainer = ({ src, alt, size, flipped = false, padding }) => {
+  const { width } = useViewPort()
+  const mobile = width < 750
+  const defaultSize = mobile ? '60px' : '100px'
+  const defaultPadding = mobile ? '10px' : '20px';
+  
   return (
-    <StyledIconContainer size={size} flipped={flipped}>
+    <StyledIconContainer size={size ? size : defaultSize} flipped={flipped} padding={padding ? padding : defaultPadding} mobile={mobile}>
       <img src={src} alt={alt} />
     </StyledIconContainer>
   )
@@ -12,18 +18,14 @@ const IconContainer = ({ src, alt, size, flipped }) => {
 export default IconContainer
 
 const StyledIconContainer = styled.div`
-    max-width: ${props => props.size};
+    width: ${props => props.size};
     height: ${props => props.size};
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: ${props => props.padding };
 
     ${props => props.flipped && `
       transform: scaleX(-1);
     `}
 `
-
-IconContainer.defaultProps = {
-  size: '60px',
-  flipped: false,
-}

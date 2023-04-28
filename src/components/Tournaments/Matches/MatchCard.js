@@ -6,11 +6,11 @@ import { useState, useEffect } from 'react';
 import SpoilerCover from './SpoilerCover';
 import useViewPort from '../../Utils/useViewport';
 
-const MatchCard = ({ match, gameType }) => {
+const MatchCard = ({ match, gameType, forceMobile = false }) => {
   const [vodsShown, setVodsShown] = useState(false)
   const [revealed, setRevealed] = useState(match.revealed)
   const { width } = useViewPort()
-  const isMobile = width < 750
+  const isMobile = forceMobile || width < 750
   const showVods = match.isCompleted && (!isMobile || vodsShown)
 
   const toggleVodsShown = () => {
@@ -46,20 +46,24 @@ export default MatchCard
 
 const StyledMatchCard = styled.div`
   position: relative;
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: space-around;
-  padding: 1rem;
+  grid-template-columns: 1fr 5fr 2fr 2fr 1fr;
+
   border-bottom: 1px solid rgba(211, 211, 211, 0.1);
 
   ${props => props.isMobile && `
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     flex-direction: column;
+    padding: 0.5rem;
   `}
 `
 
 const Divider = styled.div`
   padding-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   width: 100%;
   border-bottom: 1px solid rgba(211, 211, 211, 0.1);
 `

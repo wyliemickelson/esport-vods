@@ -26,7 +26,7 @@ const VolumeSlider = ({ updateVolume }) => {
         }}
       />
       <button onClick={() => setMuted(m => !m) }>
-        <IconContainer src={muted ? volumeOffIcon : volumeOnIcon} size='30px' />
+        <IconContainer src={muted ? volumeOffIcon : volumeOnIcon} size='30px' padding='0' />
       </button>
     </StyledVolumeSlider>
   )

@@ -13,7 +13,7 @@ const TournamentCard = ({ tournament, onClick, isCurrent}) => {
   return (
     <Link replace={true} to={`/${gameType}/${tournament._id}/${urlTitle}`}>
       <StyledTournamentCard onClick={onClick} isCurrent={isCurrent}>
-        <IconContainer src={img} alt='event icon' />
+        <IconContainer src={img} alt='event icon' size='60px' padding='0px' />
         <p>{tournament.details.title}</p>
       </StyledTournamentCard>
     </Link>

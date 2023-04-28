@@ -28,19 +28,18 @@ const Team = ({ team, side, fullName = false, imgSize }) => {
 
   return (
     <StyledTeam imgSize={imgSize}>
-      {side === 'left' && <p>{shownName}</p>}
+      {side === 'left' && <p style={{'text-align': 'right'}}>{shownName}</p>}
       <IconContainer src={teamIcon} alt='team icon' size={imgSize} />
-      {side === 'right' && <p>{shownName}</p>}
+      {side === 'right' && <p style={{'text-align': 'left'}}>{shownName}</p>}
     </StyledTeam>
   )
 }
 
 const StyledTeam = styled.div`
-  display: flex;
-  column-gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
   align-items: center;
-  justify-content: center;
-  min-width: ${props => props.imgSize ? '' : '120px'}
 `
 
 export default Team

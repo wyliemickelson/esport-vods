@@ -8,13 +8,14 @@ import useViewPort from './Utils/useViewport';
 import { useParams } from 'react-router-dom';
 import { LoadedTournamentsContext } from '../contexts/LoadedTournamentsContext';
 import ReactLoading from 'react-loading'
+import TournamentPlaceholder from './Utils/TournamentPlaceholder';
 
 const MainContent = ({ tournaments, currentTournament, gameFilter}) => {
   const { tournamentId } = useParams()
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const { width } = useViewPort()
   const { isLoading } = useContext(LoadedTournamentsContext)
-  const useMobileSidebar = width < 1050
+  const useMobileSidebar = width < 1150
 
   useEffect(() => {
     setDropdownOpen(tournamentId ? false : true)
@@ -34,7 +35,8 @@ const MainContent = ({ tournaments, currentTournament, gameFilter}) => {
             currentTournament={currentTournament}
           />
       }
-      {currentTournament && !dropdownOpen && !isLoading && <TournamentSection tournament={currentTournament} />}
+      {(currentTournament && !dropdownOpen && !isLoading) && <TournamentSection tournament={currentTournament} />}
+      {!isLoading && !currentTournament && <TournamentPlaceholder />}
       {isLoading && <StyledLoading isMobile={useMobileSidebar}><ReactLoading type='spin' width='5%' /></StyledLoading>}
     </StyledMainContent>
   )

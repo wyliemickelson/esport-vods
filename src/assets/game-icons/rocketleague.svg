@@ -68,27 +68,27 @@
        gradientUnits="userSpaceOnUse">
       <stop
          offset="0"
-         stop-color="#00aeff"
+         stop-color="#22232e"
          id="stop12" />
       <stop
          offset=".131"
-         stop-color="#00a5f7"
+         stop-color="#22232e"
          id="stop14" />
       <stop
          offset=".345"
-         stop-color="#008de0"
+         stop-color="#22232e"
          id="stop16" />
       <stop
          offset=".616"
-         stop-color="#0065ba"
+         stop-color="#22232e"
          id="stop18" />
       <stop
          offset=".928"
-         stop-color="#002f87"
+         stop-color="#22232e"
          id="stop20" />
       <stop
          offset="1"
-         stop-color="#00217a"
+         stop-color="#22232e"
          id="stop22" />
     </radialGradient>
     <path

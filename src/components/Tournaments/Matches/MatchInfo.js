@@ -28,12 +28,28 @@ MatchInfo.defaultProps = {
 export default MatchInfo
 
 const StyledMatchInfo = styled.div`
+
+  grid-column: 2;
   white-space: nowrap;
-  display: flex;
-  column-gap: 1rem;
+  display: grid;
+  grid-template-columns: 175px 50px 175px;
+
+  text-align: center;
   align-items: center;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 750px) {
+    width: 100%;
+    grid-template-columns: 125px 50px 125px;
+  }
+
+  @media screen and (max-width: 750px) {
+      grid-column-gap: 1rem;
+  }
+
+  @media screen and (min-width: 1300px) {
+      grid-column-gap: 2rem;
+  }
 
   ${props => !props.revealed && `
     filter: blur(15px) grayscale(1);
