@@ -7,12 +7,15 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 const MatchPageDetails = ({ match }) => {
-  const currentTournament = useContext(CurrentTournamentContext)
+  const { currentTournament } = useContext(CurrentTournamentContext)
   const { tournamentId, matchId, vodNumber } = useParams()
+
+  var specials = /[^A-Za-z 0-9]/g;
+  const urlTitle = currentTournament.details.title.replaceAll(specials, '').replaceAll(' ', '-')
 
   const nextLink = Number(vodNumber) + 1 < match?.matchData?.bestOf
     ? `/vods/${tournamentId}/${matchId}/${Number(vodNumber) + 1}`
-    : `/${currentTournament.details.gameType}/${tournamentId}/${currentTournament.details.title.replaceAll(' ', '-')}`
+    : `/${currentTournament.details.gameType}/${tournamentId}/${urlTitle}`
 
   const linkText = Number(vodNumber) + 1 < match?.matchData?.bestOf
     ? 'Next'

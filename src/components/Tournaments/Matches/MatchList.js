@@ -3,8 +3,21 @@ import styled from 'styled-components';
 import MatchCard from './MatchCard';
 import DayCard from './DayCard';
 import moment from 'moment';
+import { useContext, useRef, useEffect } from 'react';
+import { CurrentTournamentContext } from '../../../contexts/CurrentTournamentContext';
 
 const MatchList = ({ matchBucket, gameType }) => {
+  const currentMatchRef = useRef(null)
+  const { currentMatchId } = useContext(CurrentTournamentContext)
+
+  useEffect(() => {
+    // have to use settimeout because scrollintoview does not work with useeffect normally
+    setTimeout(() => currentMatchRef.current?.scrollIntoView({
+      behavior: 'auto',
+      block: 'center',
+      inline: 'center'
+    }), 0)
+  })
 
   const dayBuckets = () => {
     const dayBuckets = {}
@@ -25,12 +38,18 @@ const MatchList = ({ matchBucket, gameType }) => {
       {dayBuckets().map((dayBucket, i) =>
         <React.Fragment key={i}>
           <DayCard day={i + 1} date={dayBucket[0].dateStart} />
-          {dayBucket.map(match =>
-            <MatchCard
-              key={match._id}
-              match={match}
-              gameType={gameType}
-            />
+          {dayBucket.map(match => {
+            const isCurrentMatch = match._id === currentMatchId
+            console.log(isCurrentMatch)
+            return (
+              <MatchCard
+                refProp={isCurrentMatch ? currentMatchRef : null}
+                key={match._id}
+                match={match}
+                gameType={gameType}
+              />
+            )
+          }
           )}
         </React.Fragment>
       )}

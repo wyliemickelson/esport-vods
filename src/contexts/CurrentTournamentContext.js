@@ -8,8 +8,15 @@ export const CurrentTournamentContext = createContext()
 
 const CurrentTournamentContextProvider = ({ children }) => {
   const [currentTournament, setCurrentTournament] = useState(null)
-  const { tournamentId } = useParams()
+  const [currentMatchId, setCurrentMatchId] = useState(null)
+  const [bucketIndex, setBucketIndex] = useState(0)
+  const { tournamentId, matchId } = useParams()
   const { loadedTournaments, setLoadedTournaments, setIsLoading } = useContext(LoadedTournamentsContext)
+
+  useEffect(() => {
+    if (currentTournament?._id !== tournamentId) setCurrentMatchId(null)
+    if (matchId) setCurrentMatchId(matchId)
+  }, [matchId, tournamentId, currentTournament])
   
   useEffect(() => {
     const newCurrentTournament = loadedTournaments?.find(t => t._id === tournamentId)
@@ -28,7 +35,7 @@ const CurrentTournamentContextProvider = ({ children }) => {
   }, [tournamentId, loadedTournaments, setLoadedTournaments, setIsLoading])
 
   return (
-    <CurrentTournamentContext.Provider value={currentTournament}>
+    <CurrentTournamentContext.Provider value={{ currentTournament, bucketIndex, setBucketIndex, currentMatchId }}>
       {children}
     </CurrentTournamentContext.Provider>
   )

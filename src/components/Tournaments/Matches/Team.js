@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { CurrentTournamentContext } from '../../../contexts/CurrentTournamentContext';
 
 const Team = ({ team, side, fullName = false, imgSize, placeholder }) => {
-  const currentTournament = useContext(CurrentTournamentContext)
+  const { currentTournament } = useContext(CurrentTournamentContext)
   const participants = currentTournament.details.participants
   const matchedTeam = placeholder ? team : participants.find(p => p._id === team._id)
 

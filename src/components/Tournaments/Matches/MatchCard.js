@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import SpoilerCover from './SpoilerCover';
 import useViewPort from '../../Utils/useViewport';
 
-const MatchCard = ({ match, gameType, forceMobile = false }) => {
+const MatchCard = ({ match, gameType, forceMobile = false, refProp }) => {
   const [vodsShown, setVodsShown] = useState(false)
   const [revealed, setRevealed] = useState(match.revealed)
   const { width } = useViewPort()
@@ -27,6 +27,7 @@ const MatchCard = ({ match, gameType, forceMobile = false }) => {
   
   return (
     <StyledMatchCard isMobile={isMobile}>
+      <div ref={refProp}></div>
       <MatchInfo
         onClick={toggleVodsShown}
         match={match}

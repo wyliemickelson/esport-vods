@@ -1,18 +1,22 @@
 import React from 'react'
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import MatchList from './Matches/MatchList';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css';
+import { useParams } from 'react-router-dom';
+import { CurrentTournamentContext } from '../../contexts/CurrentTournamentContext';
 
-const TournamentSection = ({ tournament }) => {
-  const [currentBucket, setCurrentBucket] = useState(0)
+const TournamentSection = () => {
+  const { tournamentId } = useParams()
+  const { currentTournament, bucketIndex, setBucketIndex } = useContext(CurrentTournamentContext)
 
   useEffect(() => {
-    setCurrentBucket(0)
-  }, [tournament])
+    if (tournamentId === currentTournament._id) return
+    setBucketIndex(0)
+  }, [tournamentId, setBucketIndex, currentTournament])
 
-  const buckets = tournament.matchBuckets
+  const buckets = currentTournament.matchBuckets
   const options = buckets?.map((bucket, i) => {
     return {
       value: i,
@@ -22,17 +26,17 @@ const TournamentSection = ({ tournament }) => {
 
   return (
     <StyledTournamentSection>
-      {currentBucket < buckets?.length &&
+      {bucketIndex < buckets?.length &&
         <>
           <Dropdown
             className='dropdown'
             options={options}
-            onChange={(e) => setCurrentBucket(e.value)}
-            value={options[currentBucket]}
+            onChange={(e) => setBucketIndex(e.value)}
+            value={options[bucketIndex]}
           />
           <MatchList
-            matchBucket={buckets[currentBucket]}
-            gameType={tournament.details.gameType}
+            matchBucket={buckets[bucketIndex]}
+            gameType={currentTournament.details.gameType}
           />
         </>
       }

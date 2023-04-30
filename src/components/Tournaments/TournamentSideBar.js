@@ -7,7 +7,7 @@ import { CurrentTournamentContext } from '../../contexts/CurrentTournamentContex
 
 const TournamentSideBar = ({ tournaments, isMobile, eventClick }) => {
   const { isLoading } = useContext(LoadedTournamentsContext)
-  const currentTournament = useContext(CurrentTournamentContext)
+  const { currentTournament } = useContext(CurrentTournamentContext)
   const showHeader = !isMobile || (isMobile && !currentTournament)
 
   return (
