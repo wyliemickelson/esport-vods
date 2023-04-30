@@ -27,14 +27,12 @@ const StyledVodList = styled.div`
   display: flex;
   color: var(--text-color-2);
   padding: 0.5rem;
+  justify-content: flex-end;
 
   a {
     padding: 0.7rem;
   }
 
-  /* span {
-    padding: 0 0.7rem;
-  } */
   p {
     font-weight: 500;
     padding-right: 1rem;

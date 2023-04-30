@@ -8,14 +8,16 @@ const MatchInfo = ({ match, gameType, onClick, revealed, extraStyles, fullName, 
     logoSrc: `game-icons/${gameType}.svg`
   }
 
-  const team1 = match.isCompleted ? match.matchData.team1 : fillerTeam
-  const team2 = match.isCompleted ? match.matchData.team2 : fillerTeam
+  const placeholder = !match?.isCompleted
+
+  const team1 = !placeholder ? match.matchData.team1 : fillerTeam
+  const team2 = !placeholder ? match.matchData.team2 : fillerTeam
 
   return (
-    <StyledMatchInfo onClick={onClick} revealed={revealed} extraStyles={extraStyles}>
-      <Team team={team1} fullName={fullName} side='left' imgSize={imgSize} />
+    <StyledMatchInfo onClick={onClick} revealed={revealed} extraStyles={extraStyles} placeholder={placeholder ? 1 : 0}>
+      <Team team={team1} placeholder={placeholder} fullName={fullName} side='left' imgSize={imgSize} />
       <p>VS</p>
-      <Team team={team2} fullName={fullName} side='right' imgSize={imgSize} />
+      <Team team={team2} placeholder={placeholder} fullName={fullName} side='right' imgSize={imgSize} />
     </StyledMatchInfo>
   )
 }
@@ -29,7 +31,7 @@ export default MatchInfo
 
 const StyledMatchInfo = styled.div`
 
-  grid-column: 2;
+  grid-column: ${props => props.placeholder ? '1 / -1' : 2 };
   white-space: nowrap;
   display: grid;
   grid-template-columns: 175px 50px 175px;

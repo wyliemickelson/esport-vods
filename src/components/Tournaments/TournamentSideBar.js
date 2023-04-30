@@ -35,7 +35,7 @@ const StyledTournamentSideBar = styled.div`
   position: sticky;
   top: 61px;
   min-width: 320px;
-  width: ${props => props.currentTournament || props.isLoading ? '33%' : '25%'};
+  width: 33%;
   background-color: var(--bg-color-dark-alt);
   height: calc(100vh - 61px);
   color: var(--text-color-2);

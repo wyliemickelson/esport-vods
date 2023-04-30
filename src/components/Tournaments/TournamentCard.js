@@ -8,7 +8,8 @@ const TournamentCard = ({ tournament, onClick, isCurrent}) => {
   const img = require(`./../../assets/${tournament?.details?.logoSrc}`)
   const { gameType } = useParams()
 
-  const urlTitle = tournament.details.title.replaceAll(' ', '-')
+  var specials = /[^A-Za-z 0-9]/g;
+  const urlTitle = tournament.details.title.replaceAll(specials, '').replaceAll(' ', '-')
 
   return (
     <Link replace={true} to={`/${gameType}/${tournament._id}/${urlTitle}`}>
