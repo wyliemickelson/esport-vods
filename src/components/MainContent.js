@@ -36,7 +36,7 @@ const MainContent = ({ tournaments, currentTournament, gameFilter}) => {
           />
       }
       {(currentTournament && !dropdownOpen && !isLoading) && <TournamentSection tournament={currentTournament} />}
-      {!isLoading && !currentTournament && <TournamentPlaceholder />}
+      {!isLoading && !currentTournament && !useMobileSidebar && <TournamentPlaceholder />}
       {isLoading && <StyledLoading isMobile={useMobileSidebar}><ReactLoading type='spin' width='5%' /></StyledLoading>}
     </StyledMainContent>
   )

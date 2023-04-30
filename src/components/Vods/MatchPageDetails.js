@@ -8,27 +8,28 @@ import { useParams } from 'react-router-dom';
 
 const MatchPageDetails = ({ match }) => {
   const { currentTournament } = useContext(CurrentTournamentContext)
-  const { tournamentId, matchId, vodNumber } = useParams()
+  let { gameType, tournamentId, matchId, vodNumber } = useParams()
 
   var specials = /[^A-Za-z 0-9]/g;
   const urlTitle = currentTournament.details.title.replaceAll(specials, '').replaceAll(' ', '-')
+  vodNumber = Number(vodNumber)
+  const hasPrev = vodNumber - 1 < match?.matchData?.bestOf && vodNumber - 1 >= 0
+  const hasNext = vodNumber + 1 < match?.matchData?.bestOf
 
-  const nextLink = Number(vodNumber) + 1 < match?.matchData?.bestOf
-    ? `/vods/${tournamentId}/${matchId}/${Number(vodNumber) + 1}`
-    : `/${currentTournament.details.gameType}/${tournamentId}/${urlTitle}`
-
-  const linkText = Number(vodNumber) + 1 < match?.matchData?.bestOf
-    ? 'Next'
-    : 'Return to Event'
+  const prevLink = `/${gameType}/vods/${tournamentId}/${matchId}/${vodNumber - 1}`
+  const nextLink = `/${gameType}/vods/${tournamentId}/${matchId}/${vodNumber + 1}`
 
   return (
     <DetailsContainer>
       <StyledDetails>
-        <h3>{currentTournament.details.title}</h3>
+        <Link to={`/${gameType}/${tournamentId}/${urlTitle}`}>
+          <h3>{currentTournament.details.title}</h3>
+        </Link>
         <MatchInfo match={match} extraStyles={`justify-content: center;`} />
         <LinkContainer>
-          <h3>Game {Number(vodNumber) + 1}/{match.matchData.bestOf}</h3>
-          <Link to={nextLink}><h3>{linkText}</h3></Link>
+          {hasPrev && <Link to={prevLink}><h3>{'<'}</h3></Link>}
+          <h3>Game {vodNumber + 1}/{match.matchData.bestOf}</h3>
+          {hasNext && <Link to={nextLink}><h3>{'>'}</h3></Link>}
         </LinkContainer>
       </StyledDetails>
     </DetailsContainer>
@@ -61,15 +62,20 @@ const StyledDetails = styled.div`
     flex-direction: row;
     max-width: 1200px;
     justify-content: space-evenly;
-    column-gap: 2rem;
+    column-gap: 3%;
   }
 `
 
 const LinkContainer = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   column-gap: 1rem;
-  justify-content: flex-end;
+  justify-content: center;
+  text-align: center;
+  a {
+    padding: 0.5rem;
+  }
 `
 
 export default MatchPageDetails

@@ -7,6 +7,7 @@ import MobileNavMenu from './MobileNavMenu';
 import { Link } from 'react-router-dom';
 import useViewPort from '../Utils/useViewport';
 import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
+import TournamentPlaceholder from '../Utils/TournamentPlaceholder';
 
 const NavBar = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
@@ -15,21 +16,24 @@ const NavBar = () => {
     setMobileNavOpen(!mobileNavOpen)
   }
   const { width } = useViewPort()
-  const isMobile = width < 600
+  const isMobile = width < 700
 
   return (
     <>
       {mobileNavOpen && <MobileNavMenu toggleMobileNav={toggleMobileNav} />}
       <StyledNavBar>
-        {isMobile
-          ? <BurgerIcon onClick={toggleMobileNav} />
-          : navEntries.map(entry => 
-            <Link replace={true} to={`/${entry.gameType}`} key={entry.name}>
-              <StyledNavLink>
-                {entry.name}
-              </StyledNavLink>
-            </Link>
-          )}
+        <div>
+          {isMobile
+            ? <BurgerIcon onClick={toggleMobileNav} />
+            : navEntries.map(entry =>
+              <Link replace={true} to={`/${entry.gameType}`} key={entry.name}>
+                <StyledNavLink>
+                  {entry.name}
+                </StyledNavLink>
+              </Link>
+            )}
+        </div>
+        <TournamentPlaceholder nav />
       </StyledNavBar>
     </>
   )
@@ -38,6 +42,7 @@ const NavBar = () => {
 const StyledNavBar = styled.nav`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 61px;
 
   position: sticky;

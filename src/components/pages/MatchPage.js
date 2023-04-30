@@ -9,7 +9,7 @@ import PlayerContextProvider from '../../contexts/PlayerContext'
 import MatchPageDetails from '../Vods/MatchPageDetails'
 
 const MatchPage = () => {
-  const { matchId, vodNumber, tournamentId } = useParams()
+  const { matchId, vodNumber } = useParams()
   const { currentTournament } = useContext(CurrentTournamentContext)
 
   useEffect(() => {

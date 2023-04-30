@@ -9,7 +9,7 @@ import { CurrentTournamentContext } from '../../contexts/CurrentTournamentContex
 import { useEffect } from 'react';
 
 const Home = () => {
-  const { gameType: gameFilter, touramentId } = useParams()
+  const { gameType: gameFilter } = useParams()
   const tournaments = useContext(TournamentsDetailsContext)
   const { currentTournament } = useContext(CurrentTournamentContext)
 

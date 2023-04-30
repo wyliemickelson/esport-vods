@@ -14,7 +14,7 @@ const App = () => {
           <Route path="/:gameType" element={<CheckRoute type='game' />}>
             <Route path=":tournamentId/:tournamentTitle" element={<CheckRoute type='tournament' />} />
           </Route>
-          <Route path="/vods/:tournamentId/:matchId/:vodNumber" element={<CheckRoute type='vod' />} />
+          <Route path=":gameType/vods/:tournamentId/:matchId/:vodNumber" element={<CheckRoute type='vod' />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </LoadedTournamentsContextProvider>

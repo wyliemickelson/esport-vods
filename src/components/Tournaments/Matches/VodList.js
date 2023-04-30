@@ -6,14 +6,14 @@ import { useParams } from 'react-router-dom';
 const VodList = ({ match, revealed }) => {
   const mapData = match.matchData.mapData
   const bestOf = match.matchData.bestOf
-  const { tournamentId } = useParams()
+  const { tournamentId, gameType } = useParams()
   const paddedMaps = Array.from({ ...mapData, length: bestOf })
   return (
     <StyledVodList revealed={revealed}>
       <p>Game</p>
       <div>
         {paddedMaps.map((map, i) =>
-          <Link to={`/vods/${tournamentId}/${match._id}/${i}`} key={map?._id || i}>
+          <Link to={`/${gameType}/vods/${tournamentId}/${match._id}/${i}`} key={map?._id || i}>
             <span>{i + 1}</span>
           </Link>
         )}
