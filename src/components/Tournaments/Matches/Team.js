@@ -4,7 +4,7 @@ import IconContainer from '../../Utils/IconContainer';
 import { useContext } from 'react';
 import { CurrentTournamentContext } from '../../../contexts/CurrentTournamentContext';
 
-const Team = ({ team, side, fullName = false, imgSize, placeholder }) => {
+const Team = ({ team, side, fullName = false, imgSize, placeholder, onClick }) => {
   const { currentTournament } = useContext(CurrentTournamentContext)
   const participants = currentTournament.details.participants
   const matchedTeam = placeholder ? team : participants.find(p => p._id === team._id)
@@ -14,15 +14,16 @@ const Team = ({ team, side, fullName = false, imgSize, placeholder }) => {
   const shownName = fullName ? matchedTeam.name : matchedTeam.shortName
 
   return (
-    <StyledTeam imgSize={imgSize}>
-      {side === 'left' && <p style={{'textAlign': 'right'}}>{shownName}</p>}
+    <StyledTeam imgSize={imgSize} onClick={onClick}>
+      {side === 'left' && <p style={{'textAlign': 'right'}}>{placeholder ? team.name : shownName}</p>}
       <IconContainer src={teamIcon} alt='team icon' size={imgSize} />
-      {side === 'right' && <p style={{'textAlign': 'left'}}>{shownName}</p>}
+      {side === 'right' && <p style={{'textAlign': 'left'}}>{placeholder ? team.name : shownName}</p>}
     </StyledTeam>
   )
 }
 
 const StyledTeam = styled.div`
+  
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 1rem;

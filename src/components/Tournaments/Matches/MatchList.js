@@ -40,7 +40,6 @@ const MatchList = ({ matchBucket, gameType }) => {
           <DayCard day={i + 1} date={dayBucket[0].dateStart} />
           {dayBucket.map(match => {
             const isCurrentMatch = match._id === currentMatchId
-            console.log(isCurrentMatch)
             return (
               <MatchCard
                 refProp={isCurrentMatch ? currentMatchRef : null}

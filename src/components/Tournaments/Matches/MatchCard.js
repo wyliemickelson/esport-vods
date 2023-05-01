@@ -2,16 +2,26 @@ import React from 'react'
 import styled from 'styled-components';
 import MatchInfo from './MatchInfo';
 import VodList from './VodList';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import SpoilerCover from './SpoilerCover';
 import useViewPort from '../../Utils/useViewport';
+import { UserDataContext } from '../../../contexts/UserDataContext';
+import HideButton from './HideButton';
+import CheckBox from './CheckBox';
 
 const MatchCard = ({ match, gameType, forceMobile = false, refProp }) => {
   const [vodsShown, setVodsShown] = useState(false)
-  const [revealed, setRevealed] = useState(match.revealed)
   const { width } = useViewPort()
   const isMobile = forceMobile || width < 750
   const showVods = match.isCompleted && (!isMobile || vodsShown)
+  const { userRevealedIds, userWatchedIds, addUserId, removeUserId } = useContext(UserDataContext)
+
+  const defaultRevealed = match.revealed
+  const revealed = userRevealedIds.includes(match._id) || defaultRevealed
+
+  const showScores = userWatchedIds.includes(match._id)
+
+  const showHideButton = !defaultRevealed && revealed
 
   const toggleVodsShown = () => {
     if (isMobile) {
@@ -19,26 +29,37 @@ const MatchCard = ({ match, gameType, forceMobile = false, refProp }) => {
     }
   }
 
-  useEffect(() => {
-    if (!match.isCompleted) {
-      setRevealed(true)
+  const handleHide = () => {
+    removeUserId(match._id, 'revealed')
+    setVodsShown(false)
+  }
+
+  const handleCheckBoxClick = (e) => {
+    e.stopPropagation()
+    if (showScores) {
+      removeUserId(match._id, 'watched')
+    } else {
+      addUserId(match._id, 'watched')
     }
-  }, [match])
+  }
   
   return (
     <StyledMatchCard isMobile={isMobile}>
       <div ref={refProp}></div>
+      {showHideButton && <HideButton onClick={handleHide} isMobile={isMobile} />}
       <MatchInfo
+        handleCheckBox={handleCheckBoxClick}
+        showScores={showScores}
         onClick={toggleVodsShown}
         match={match}
         gameType={gameType}
         isMobile={isMobile}
-        vodsShown={vodsShown}
+        vodsShown={showVods}
         revealed={revealed}
       />
       {isMobile && vodsShown && <Divider />}
       {showVods &&  <VodList match={match} revealed={revealed} />}
-      {!revealed && <SpoilerCover onClick={() => setRevealed(true)} />}
+      {!revealed && <SpoilerCover onClick={() => addUserId(match._id, 'revealed')} />}
     </StyledMatchCard>
   )
 }
@@ -50,6 +71,7 @@ const StyledMatchCard = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 5fr 2fr 2fr 1fr;
+  overflow: hidden;
 
   border-bottom: 1px solid rgba(211, 211, 211, 0.1);
 

@@ -46,7 +46,7 @@ const StyledNavBar = styled.nav`
   height: 61px;
 
   position: sticky;
-  top: 0;
+  top: -1px;
   z-index: 5;
   background-color: var(--bg-color-dark);
 `

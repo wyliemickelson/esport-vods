@@ -3,20 +3,23 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import CheckRoute from "./components/Utils/CheckRoute";
 import TournamentsDetailsContextProvider from "./contexts/TournamentsDetailsContext";
 import LoadedTournamentsContextProvider from "./contexts/LoadedTournamentsContext";
+import UserDataContextProvider from "./contexts/UserDataContext";
 
 const App = () => {
   return (
     <TournamentsDetailsContextProvider>
       <LoadedTournamentsContextProvider>
-        <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<Navigate replace to='/leagueoflegends' />} />
-          <Route path="/:gameType" element={<CheckRoute type='game' />}>
-            <Route path=":tournamentId/:tournamentTitle" element={<CheckRoute type='tournament' />} />
-          </Route>
-          <Route path=":gameType/vods/:tournamentId/:matchId/:vodNumber" element={<CheckRoute type='vod' />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <UserDataContextProvider>
+          <GlobalStyle />
+          <Routes>
+            <Route path="/" element={<Navigate replace to='/leagueoflegends' />} />
+            <Route path="/:gameType" element={<CheckRoute type='game' />}>
+              <Route path=":tournamentId/:tournamentTitle" element={<CheckRoute type='tournament' />} />
+            </Route>
+            <Route path=":gameType/vods/:tournamentId/:matchId/:vodNumber" element={<CheckRoute type='vod' />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </UserDataContextProvider>
       </LoadedTournamentsContextProvider>
     </TournamentsDetailsContextProvider>
   );
