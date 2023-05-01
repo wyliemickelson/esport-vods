@@ -8,7 +8,7 @@ const TournamentsDetailsContextProvider = ({ children }) => {
   const [tournaments, setTournaments] = useState(null)
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/tournaments')
+    axios.get('/api/tournaments')
       .then(res => res.data)
       .then(tournaments => setTournaments(tournaments))
       .catch(e => console.error(e))

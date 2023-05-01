@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Team from './Team';
 import ScoreCard from './ScoreCard';
 
-const MatchInfo = ({ match, gameType, onClick, revealed, extraStyles, fullName, imgSize, showScores, handleCheckBox, vodsShown, noCheckBox }) => {
+const MatchInfo = ({ match, gameType, onClick, isMobile, revealed, extraStyles, fullName, imgSize, showScores, handleCheckBox, vodsShown, noCheckBox }) => {
   const fillerTeam = {
     name: 'TBD',
     logoSrc: `game-icons/${gameType}.svg`
@@ -18,9 +18,9 @@ const MatchInfo = ({ match, gameType, onClick, revealed, extraStyles, fullName, 
 
   return (
     <StyledMatchInfo onClick={onClick} revealed={revealed} extraStyles={extraStyles} placeholder={placeholder ? 1 : 0} vodsShown={vodsShown}>
-      <Team team={team1} placeholder={placeholder} fullName={fullName} side='left' imgSize={imgSize} />
+      <Team team={team1} placeholder={placeholder} fullName={fullName} side='left' imgSize={imgSize} isMobile={isMobile} />
       <ScoreCard noCheckBox={noCheckBox} handleCheckBox={handleCheckBox} match={match} revealed={revealed} showScores={showScores} placeholder={placeholder} />
-      <Team team={team2} placeholder={placeholder} fullName={fullName} side='right' imgSize={imgSize} />
+      <Team team={team2} placeholder={placeholder} fullName={fullName} side='right' imgSize={imgSize} isMobile={isMobile} />
     </StyledMatchInfo>
   )
 }

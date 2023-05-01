@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from 'styled-components';
-import hideIcon from './../.././../assets/hide.svg'
 import IconContainer from '../../Utils/IconContainer';
 
 const SpoilerCover = ({ onClick }) => {
   return (
     <StyledSpoilerCover onClick={onClick}>
       <p>Possible Spoilers</p>
-      <IconContainer src={hideIcon} size='35px' padding='0px' />
+      <IconContainer src='/assets/hide.svg' size='35px' padding='0px' />
       <p>Click to Reveal</p>
     </StyledSpoilerCover>
   )

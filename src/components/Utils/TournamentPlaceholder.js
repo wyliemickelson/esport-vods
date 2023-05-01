@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const TournamentPlaceholder = ({ nav }) => {
   const { gameType } = useParams()
-  const gameIcon = require(`./../../assets/game-icons/${gameType}.svg`)
+  const gameIcon = `/assets/game-icons/${gameType}.svg`
 
   return (
     <ImageContainer nav={nav}>

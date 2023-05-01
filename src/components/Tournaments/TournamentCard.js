@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 const TournamentCard = ({ tournament, onClick, isCurrent}) => {
-  const img = require(`./../../assets/${tournament?.details?.logoSrc}`)
+
+  const img = `/assets/${tournament?.details?.logoSrc}`
   const { gameType } = useParams()
 
   var specials = /[^A-Za-z 0-9]/g;

@@ -22,7 +22,7 @@ const CurrentTournamentContextProvider = ({ children }) => {
     const newCurrentTournament = loadedTournaments?.find(t => t._id === tournamentId)
     if (!newCurrentTournament && tournamentId) {
       setIsLoading(true)
-      axios.get(`http://localhost:3001/api/tournaments/${tournamentId}`)
+      axios.get(`/api/tournaments/${tournamentId}`)
         .then(res => res.data)
         .then(tournament => {
           setLoadedTournaments([...loadedTournaments, ...tournament])

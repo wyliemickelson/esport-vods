@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components';
-import playIcon from './../../assets/player-icons/play.svg'
-import pauseIcon from './../../assets/player-icons/pause.svg'
-import fullscreenIcon from './../../assets/player-icons/fullscreen.svg'
+
 import IconContainer from '../Utils/IconContainer';
 import FFControls from './FFControls';
 import VolumeSlider from './VolumeSlider';
 import { PlayerContext } from '../../contexts/PlayerContext';
 import useViewPort from '../Utils/useViewport';
+const playIcon = '/assets/player-icons/play.svg'
+const pauseIcon = '/assets/player-icons/pause.svg'
+const fullscreenIcon = '/assets/player-icons/fullscreen.svg'
 
 const PlayerControls = ({ controls, useControls }) => {
   const { play, pause, seek, fullscreen, setVolume } = controls

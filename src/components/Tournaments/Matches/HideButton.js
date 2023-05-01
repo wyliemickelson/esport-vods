@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
 import IconContainer from '../../Utils/IconContainer';
-import hideIcon from './../../../assets/hide.svg'
 
 const HideButton = ({ onClick, isMobile }) => {
   return (
     <StyledHideButton onClick={onClick} isMobile={isMobile}>
-      <IconContainer src={hideIcon} size='25px' padding='0px' />
+      <IconContainer src='/assets/hide.svg' size='25px' padding='0px' />
     </StyledHideButton>
   )
 }

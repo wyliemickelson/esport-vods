@@ -54,6 +54,7 @@ const MatchCard = ({ match, gameType, forceMobile = false, refProp }) => {
         gameType={gameType}
         vodsShown={showVods}
         revealed={revealed}
+        isMobile={isMobile}
       />
       {isMobile && vodsShown && <Divider />}
       {showVods &&  <VodList match={match} revealed={revealed} isMobile={isMobile} />}

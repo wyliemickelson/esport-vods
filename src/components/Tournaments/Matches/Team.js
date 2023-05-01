@@ -4,12 +4,11 @@ import IconContainer from '../../Utils/IconContainer';
 import { useContext } from 'react';
 import { CurrentTournamentContext } from '../../../contexts/CurrentTournamentContext';
 
-const Team = ({ team, side, fullName = false, imgSize, placeholder, onClick }) => {
+const Team = ({ team, side, fullName = false, imgSize, placeholder, onClick, isMobile }) => {
   const { currentTournament } = useContext(CurrentTournamentContext)
   const participants = currentTournament.details.participants
   const matchedTeam = placeholder ? team : participants.find(p => p._id === team._id)
-
-  const teamIcon = require(`./../../../assets/${matchedTeam.logoSrc}`)
+  const teamIcon =  `/assets/${matchedTeam.logoSrc}`
 
   const shownName = fullName ? matchedTeam.name : matchedTeam.shortName
 

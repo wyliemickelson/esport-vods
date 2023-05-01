@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import IconContainer from '../Utils/IconContainer';
-import fastForwardIcon from './../../assets/player-icons/fastForward.svg'
+const fastForwardIcon = '/assets/player-icons/fastForward.svg'
 
 const FFControls = ({ seek, reversed }) => {
   const times = [

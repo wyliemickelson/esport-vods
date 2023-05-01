@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
-import volumeOnIcon from './../../assets/player-icons/volumeOn.svg'
-import volumeOffIcon from './../../assets/player-icons/volumeOff.svg'
 import IconContainer from "../Utils/IconContainer"
 import styled from 'styled-components';
+
+const volumeOnIcon = '/assets/player-icons/volumeOn.svg'
+const volumeOffIcon = '/assets/player-icons/volumeOff.svg'
 
 const VolumeSlider = ({ updateVolume }) => {
   const [volume, setVolume] = useState(0.5)

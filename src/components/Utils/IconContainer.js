@@ -11,7 +11,7 @@ const IconContainer = ({ src, alt, size, flipped = false, padding }) => {
   
   return (
     <StyledIconContainer size={size ? size : defaultSize} flipped={flipped} padding={padding ? padding : defaultPadding} mobile={mobile}>
-      <img src={src} alt={alt} />
+      <img src={src} alt={alt} loading='lazy' />
     </StyledIconContainer>
   )
 }
