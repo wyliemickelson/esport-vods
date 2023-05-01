@@ -17,7 +17,7 @@ const DayCard = ({ day, date }) => {
 const StyledDayCard = styled.div`
   width: 100%;
   border-bottom: 1px solid rgba(211, 211, 211, 0.1);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 500;
   padding: 2rem 0 1rem 1rem;
 `

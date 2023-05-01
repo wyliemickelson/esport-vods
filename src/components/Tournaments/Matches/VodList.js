@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-const VodList = ({ match, revealed }) => {
+const VodList = ({ match, revealed, isMobile }) => {
   const mapData = match.matchData.mapData
   const bestOf = match.matchData.bestOf
   const { tournamentId, gameType } = useParams()
   const paddedMaps = Array.from({ ...mapData, length: bestOf })
   return (
-    <StyledVodList revealed={revealed}>
+    <StyledVodList revealed={revealed} isMobile={isMobile}>
       <p>Game</p>
       <div>
         {paddedMaps.map((map, i) =>
@@ -30,7 +30,7 @@ const StyledVodList = styled.div`
   justify-content: flex-end;
 
   a {
-    padding: 0.7rem;
+    padding: ${props => props.isMobile ? '0.9rem' : '0.7rem'};
   }
 
   p {

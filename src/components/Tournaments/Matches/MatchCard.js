@@ -56,7 +56,7 @@ const MatchCard = ({ match, gameType, forceMobile = false, refProp }) => {
         revealed={revealed}
       />
       {isMobile && vodsShown && <Divider />}
-      {showVods &&  <VodList match={match} revealed={revealed} />}
+      {showVods &&  <VodList match={match} revealed={revealed} isMobile={isMobile} />}
       {!revealed && <SpoilerCover onClick={() => addUserId(match._id, 'revealed')} />}
     </StyledMatchCard>
   )

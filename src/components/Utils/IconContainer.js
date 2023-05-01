@@ -5,7 +5,8 @@ import useViewPort from './useViewport';
 const IconContainer = ({ src, alt, size, flipped = false, padding }) => {
   const { width } = useViewPort()
   const mobile = width < 750
-  const defaultSize = mobile ? '60px' : '100px'
+  const desktop = width > 1300
+  const defaultSize = mobile ? '60px' : desktop ? '100px' : '80px'
   const defaultPadding = mobile ? '10px' : '30px';
   
   return (

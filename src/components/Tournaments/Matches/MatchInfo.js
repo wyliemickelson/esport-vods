@@ -54,6 +54,10 @@ const StyledMatchInfo = styled.div`
       grid-column-gap: 1rem;
   }
 
+  @media screen and (min-width: 800px) {
+      grid-column-gap: 1.5rem;
+  }
+
   @media screen and (min-width: 1300px) {
       grid-column-gap: 2rem;
   }
