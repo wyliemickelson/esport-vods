@@ -2,12 +2,11 @@ import React from 'react'
 import styled from 'styled-components';
 import MatchInfo from './MatchInfo';
 import VodList from './VodList';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import SpoilerCover from './SpoilerCover';
 import useViewPort from '../../Utils/useViewport';
 import { UserDataContext } from '../../../contexts/UserDataContext';
 import HideButton from './HideButton';
-import CheckBox from './CheckBox';
 
 const MatchCard = ({ match, gameType, forceMobile = false, refProp }) => {
   const [vodsShown, setVodsShown] = useState(false)
@@ -53,7 +52,6 @@ const MatchCard = ({ match, gameType, forceMobile = false, refProp }) => {
         onClick={toggleVodsShown}
         match={match}
         gameType={gameType}
-        isMobile={isMobile}
         vodsShown={showVods}
         revealed={revealed}
       />

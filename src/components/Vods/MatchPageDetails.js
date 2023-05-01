@@ -25,7 +25,7 @@ const MatchPageDetails = ({ match }) => {
         <Link to={`/${gameType}/${tournamentId}/${urlTitle}`}>
           <h3>{currentTournament.details.title}</h3>
         </Link>
-        <MatchInfo match={match} extraStyles={`justify-content: center;`} />
+        <MatchInfo match={match} extraStyles={`justify-content: center;`} noCheckBox />
         <LinkContainer>
           {hasPrev && <Link to={prevLink}><h3>{'<'}</h3></Link>}
           <h3>Game {vodNumber + 1}/{match.matchData.bestOf}</h3>

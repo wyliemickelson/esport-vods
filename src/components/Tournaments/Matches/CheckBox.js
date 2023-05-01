@@ -30,6 +30,7 @@ const StyledCheckBox = styled.div`
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    user-select: none;
     -webkit-transition: background 0.1s ease-in-out;
     transition: background 0.1s ease-in-out;
   }
