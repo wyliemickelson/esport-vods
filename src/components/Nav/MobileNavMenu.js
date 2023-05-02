@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 import { navEntries } from './navEntries';
 import { Link } from 'react-router-dom';
-import BurgerIcon from './BurgerIcon';
 import MobileNavHeader from './MobileNavHeader';
 
 const MobileNavMenu = ({ toggleMobileNav }) => {
