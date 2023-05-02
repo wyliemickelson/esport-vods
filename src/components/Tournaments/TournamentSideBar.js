@@ -42,7 +42,7 @@ const StyledTournamentSideBar = styled.div`
 
   ${props => props.isMobile && props.currentTournament && `
     width: 100%;
-    height: calc(100vh - 154px);
+    height: calc(100vh - 172px);
   `}
 
 ${props => props.isMobile && `

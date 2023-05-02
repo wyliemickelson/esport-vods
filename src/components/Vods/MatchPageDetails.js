@@ -39,6 +39,7 @@ const MatchPageDetails = ({ match }) => {
 const DetailsContainer = styled.div`
   padding-bottom: 5vh;
   margin: 2rem auto;
+  text-align: center;
 `
 
 const StyledDetails = styled.div`
@@ -54,7 +55,7 @@ const StyledDetails = styled.div`
   row-gap: 2rem;
   width: 90%;
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 825px) {
     > :first-child, >:last-child {
       width: 30%;
     }

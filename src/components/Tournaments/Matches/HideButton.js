@@ -5,7 +5,7 @@ import IconContainer from '../../Utils/IconContainer';
 const HideButton = ({ onClick, isMobile }) => {
   return (
     <StyledHideButton onClick={onClick} isMobile={isMobile}>
-      <IconContainer src='/assets/hide.svg' size='25px' padding='0px' />
+      <IconContainer src='/assets/icons/hide.svg' size='25px' padding='0px' />
     </StyledHideButton>
   )
 }

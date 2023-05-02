@@ -28,7 +28,7 @@ const StyledTournamentListDropdown = styled.div`
   flex-direction: column;
   position: sticky;
   z-index: 4;
-  top: 59px;
+  top: 78px;
 `
 
 export default TournamentListDropdown

@@ -6,7 +6,7 @@ const SpoilerCover = ({ onClick }) => {
   return (
     <StyledSpoilerCover onClick={onClick}>
       <p>Possible Spoilers</p>
-      <IconContainer src='/assets/hide.svg' size='35px' padding='0px' />
+      <IconContainer src='/assets/icons/hide.svg' size='35px' padding='0px' />
       <p>Click to Reveal</p>
     </StyledSpoilerCover>
   )

@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { navEntries } from './navEntries';
 import { Link } from 'react-router-dom';
 import BurgerIcon from './BurgerIcon';
+import MobileNavHeader from './MobileNavHeader';
 
 const MobileNavMenu = ({ toggleMobileNav }) => {
   return (
     <StyledMobileNavMenu>
-      <BurgerIcon onClick={toggleMobileNav}/>
-      <div>
+      <MobileNavHeader toggleMobileNav={toggleMobileNav} />
+      <div className='entries'>
         {navEntries.map(entry => {
           return <Link replace={true} onClick={toggleMobileNav} key={entry.name}
           to={`/${entry.gameType}`}>
@@ -21,16 +22,23 @@ const MobileNavMenu = ({ toggleMobileNav }) => {
 }
 
 const StyledMobileNavMenu = styled.section`
-  position: absolute;
+  position: fixed;
+  top: 0;
+  right: 0;
   background-color: #1f1f1f;
   z-index: 10;
   display: flex;
+  align-items: flex-end;
   flex-direction: column;
   height: 100vh;
-  width: 100%;
+  width: 50%;
   font-size: 1.5rem;
 
-  > div {
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
+
+  .entries {
     width: 90%;
     margin: 0 auto;
     display: flex;

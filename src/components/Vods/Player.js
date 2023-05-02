@@ -11,7 +11,7 @@ const Player = ({ vod, match }) => {
   const Player = useRef()
   const { setIsPaused } = useContext(PlayerContext)
   const { width } = useViewPort()
-  const useCustomControls = width > 800
+  const useCustomControls = width > 825
 
 
   let src = new URL(vod.url)
@@ -90,14 +90,20 @@ const Player = ({ vod, match }) => {
 }
 
 const StyledPlayer = styled.div`
-
+    width: 90%;
+    max-width: 1750px;
+    margin: 0 auto;
+    margin-top: 1rem;
 `
 
 const PlayerWrapper = styled.div`
-    max-height: 85vh;
+    box-sizing: content-box;
+    border: 10px solid var(--bg-color-dark);
+    border-radius: 0.5rem;
+    max-height: 75vh;
     overflow: hidden;
   > div {
-    max-height: 85vh;
+    max-height: 75vh;
     position: relative;
     width: 100%;
     height: 0;
@@ -105,7 +111,7 @@ const PlayerWrapper = styled.div`
     overflow: hidden;
   }
   iframe {
-    max-height: 85vh;
+    max-height: 75vh;
     overflow: hidden;
     position: absolute;
     width: 100%;

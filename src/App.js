@@ -36,7 +36,7 @@ const GlobalStyle = createGlobalStyle`
   --bg-color-dark-alt: #22232e;
   --bg-color-lighter:	#1d1e27;
 
-  --color-acc-1: #ECB365;
+  --color-acc-1: #66ffcc;
 }
 
 @media screen and (min-width: 1000px) {

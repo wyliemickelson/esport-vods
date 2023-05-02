@@ -26,7 +26,6 @@ const ImageContainer = styled.div`
 
   ${props => props.nav && `
     width: auto;
-    padding-right: 5%;
 
     img {
       max-width: 40px;

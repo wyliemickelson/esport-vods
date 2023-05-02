@@ -6,9 +6,9 @@ import FFControls from './FFControls';
 import VolumeSlider from './VolumeSlider';
 import { PlayerContext } from '../../contexts/PlayerContext';
 import useViewPort from '../Utils/useViewport';
-const playIcon = '/assets/player-icons/play.svg'
-const pauseIcon = '/assets/player-icons/pause.svg'
-const fullscreenIcon = '/assets/player-icons/fullscreen.svg'
+const playIcon = '/assets/icons/play.svg'
+const pauseIcon = '/assets/icons/pause.svg'
+const fullscreenIcon = '/assets/icons/fullscreen.svg'
 
 const PlayerControls = ({ controls, useControls }) => {
   const { play, pause, seek, fullscreen, setVolume } = controls
@@ -19,7 +19,7 @@ const PlayerControls = ({ controls, useControls }) => {
     <>
       {useControls &&
         <ControlsContainer>
-          {width > 1100 && <Container width={width}></Container>}
+          {width > 1200 && <Container width={width}></Container>}
 
           <StyledPlayerControls>
             <FFControls seek={seek} reversed />
@@ -47,7 +47,7 @@ const PlayerControls = ({ controls, useControls }) => {
 }
 
 const Container = styled.div`
-  ${props => props.width > 1100 && `width: 300px`}
+  ${props => props.width > 1200 && `width: 300px`}
 
 `
 
