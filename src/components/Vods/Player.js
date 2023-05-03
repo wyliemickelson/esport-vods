@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRef, useContext, useState } from 'react'
+import { useRef, useContext } from 'react'
 import PlayerControls from './PlayerControls';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
