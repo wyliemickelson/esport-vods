@@ -33,11 +33,11 @@ const StyledTournamentSideBar = styled.div`
     width: 100%;
   }
   position: sticky;
-  top: 61px;
+  top: 81px;
   min-width: 320px;
   width: 33%;
   background-color: var(--bg-color-dark-alt);
-  height: calc(100vh - 61px);
+  height: calc(100vh - 81px);
   color: var(--text-color-2);
 
   ${props => props.isMobile && props.currentTournament && `

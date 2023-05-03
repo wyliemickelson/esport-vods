@@ -15,7 +15,7 @@ const MainContent = ({ tournaments, currentTournament, gameFilter}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const { width } = useViewPort()
   const { isLoading } = useContext(LoadedTournamentsContext)
-  const useMobileSidebar = width < 1150
+  const useMobileSidebar = width < 1175
 
   useEffect(() => {
     setDropdownOpen(tournamentId ? false : true)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRef, useContext } from 'react'
+import { useRef, useContext, useState } from 'react'
 import PlayerControls from './PlayerControls';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
@@ -73,12 +73,10 @@ const Player = ({ vod, match }) => {
               if (e.data === 2) setIsPaused(true)
             }}
             opts={{
-              width: '100%',
-              height: '',
-              start,
               playerVars: {
                 autoplay: false,
                 controls: useCustomControls ? 0 : 1,
+                start,
               }
             }} />
         }

@@ -27,7 +27,7 @@ const TwitchEmbed = ({ vod, onVideoReady, useCustomControls }) => {
       const time = src.searchParams.get('t') ?? 0
       const options = {
         video: vod.videoId,
-        autoplay: false,
+        autoplay: true, // autoplay: false breaks mobile player
         controls: !useCustomControls,
         time: time,
       }

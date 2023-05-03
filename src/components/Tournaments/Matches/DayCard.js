@@ -6,6 +6,7 @@ const DayCard = ({ day, date }) => {
 
   const m = moment(date)
   const formattedDate = m.format('dddd, MMMM Do')
+  if (formattedDate === 'Invalid date') return
 
   return (
     <StyledDayCard>
