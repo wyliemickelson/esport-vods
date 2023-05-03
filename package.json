@@ -23,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "new-tournament": "node -e \"require('child_process').execSync(`git add public && git commit -m \"added-new-tournament-images\" && git push origin main`);\""
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {
