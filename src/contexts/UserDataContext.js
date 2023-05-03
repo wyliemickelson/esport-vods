@@ -19,7 +19,7 @@ const UserDataContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    localStorage.clear() // remove in production
+    // localStorage.clear() // remove in production
     const savedRevealedIds = JSON.parse(localStorage.getItem('userRevealedIds'))
     const savedWatchedIds = JSON.parse(localStorage.getItem('userWatchedIds'))
     setUserRevealedIds(savedRevealedIds ?? [])

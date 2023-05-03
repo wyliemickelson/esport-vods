@@ -1,18 +1,22 @@
-import React from 'react'
-import { useRef, useContext } from 'react'
+import React, { useEffect } from 'react'
+import { useRef, useContext, useState } from 'react'
 import PlayerControls from './PlayerControls';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
 import { PlayerContext } from '../../contexts/PlayerContext';
 import TwitchEmbed from './TwitchEmbed';
 import useViewPort from '../Utils/useViewport';
+import CheckBox from '../Tournaments/Matches/CheckBox';
 
 const Player = ({ vod, match }) => {
   const Player = useRef()
-  const { setIsPaused } = useContext(PlayerContext)
   const { width } = useViewPort()
-  const useCustomControls = width > 825
+  const [useCustomControls, setUseCustomControls] = useState(width > 825)
+  const { setIsPaused } = useContext(PlayerContext)
 
+  useEffect(() => {
+    if (width < 825) setUseCustomControls(false)
+  }, [width])
 
   let src = new URL(vod.url)
   const start = src.searchParams.get('t') ?? 0
@@ -34,7 +38,7 @@ const Player = ({ vod, match }) => {
       setVolume: (newVolume) => {
         try {
           Player.current?.setVolume(newVolume * 100)
-        } catch {return}
+        } catch { return }
       }
     }
   }
@@ -50,6 +54,10 @@ const Player = ({ vod, match }) => {
 
   return (
     <StyledPlayer>
+      {width > 825 && <div className='controls-check' onClick={() => setUseCustomControls(!useCustomControls)}>
+        <CheckBox checked={!useCustomControls} />
+        <button>Original Controls</button>
+      </div>}
       <PlayerWrapper id='playerwrapper'>
         {type === 'twitch' &&
           <TwitchEmbed
@@ -92,6 +100,16 @@ const StyledPlayer = styled.div`
     max-width: 1750px;
     margin: 0 auto;
     margin-top: 1rem;
+
+    .controls-check {
+      margin: 1rem 0;
+      margin-top: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      column-gap: 0.2rem;
+      width: fit-content;
+    }
 `
 
 const PlayerWrapper = styled.div`
