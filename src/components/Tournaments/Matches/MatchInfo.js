@@ -9,7 +9,7 @@ const MatchInfo = ({ match, gameType, onClick, isMobile, revealed, extraStyles, 
     logoSrc: `game-icons/${gameType}.svg`
   }
 
-  const placeholder = !match?.isCompleted || !revealed
+  const placeholder = (match && !match.isCompleted) || !revealed
 
   const team1 = !placeholder ? match.matchData.team1 : fillerTeam
   const team2 = !placeholder ? match.matchData.team2 : fillerTeam

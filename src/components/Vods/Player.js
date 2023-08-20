@@ -82,7 +82,7 @@ const Player = ({ vod, match }) => {
             }}
             opts={{
               playerVars: {
-                autoplay: false,
+                autoplay: true,
                 controls: useCustomControls ? 0 : 1,
                 start,
               }
